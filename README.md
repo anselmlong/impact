@@ -1,0 +1,2 @@
+# impact
+Encrypted page (StatiCrypt)
