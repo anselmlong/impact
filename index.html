@@ -1,612 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Anselm on Maps.gov.sg</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐴</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..100,500..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
 <style>
 :root{
-  --page:#f3f5f2; --surface:#fcfdfb; --ink:#13201c; --ink2:#4a5853; --muted:#7c8883;
-  --rule:#dde3df; --band:#dbe2de; --accent:#2a78d6; --accent-ink:#1c5cab; --accent-wash:#e3eefb;
-  --closed:#8a9590; --good:#006300; --warn:#8a5a00; --warn-wash:#fbf0d9; --crit:#b42f2f;
-  --display:"Archivo","Arial Narrow",system-ui,sans-serif;
-  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --page:#0e1412; --surface:#151c19; --ink:#edf2ef; --ink2:#b6c1bc; --muted:#84908b;
-    --rule:#26302c; --band:#2a3531; --accent:#3987e5; --accent-ink:#86b6ef; --accent-wash:#16273b;
-    --closed:#6d7974; --good:#0ca30c; --warn:#e0a63a; --warn-wash:#2c2416; --crit:#e66767;
-  }
-}
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --page:#0e1412; --surface:#151c19; --ink:#edf2ef; --ink2:#b6c1bc; --muted:#84908b;
-  --rule:#26302c; --band:#2a3531; --accent:#3987e5; --accent-ink:#86b6ef; --accent-wash:#16273b;
-  --closed:#6d7974; --good:#0ca30c; --warn:#e0a63a; --warn-wash:#2c2416; --crit:#e66767;
+  --paper:#f6f4ef; --card:#fffdf8; --ink:#16181a; --muted:#6b6f73; --faint:#a9a59c; --rule:#e2ded4;
+  --accent:#0f6e4f; --accent-soft:#d9ebe3; --warn:#b5541c; --warn-soft:#f5e3d6;
+  --display:"Archivo",system-ui,sans-serif; --sans:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
 }
 *{box-sizing:border-box}
-body{background:var(--page);color:var(--ink);font:15px/1.6 var(--sans);padding-inline:20px;padding-block:28px 64px}
-.wrap{max-width:1080px;margin-inline:auto;display:flex;flex-direction:column;gap:56px}
-a{color:var(--accent-ink);text-underline-offset:2px}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-h1,h2,h3{font-family:var(--display);font-stretch:75%;text-wrap:balance;margin:0;line-height:1.1}
-h1{font-size:clamp(34px,6vw,56px);font-weight:800;letter-spacing:-.01em}
-h2{font-size:26px;font-weight:700}
-h3{font-size:18px;font-weight:700;font-stretch:85%}
-p{margin:0}
-.eyebrow{font:500 12px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.lede{color:var(--ink2);max-width:68ch}
-.mono{font-family:var(--mono);font-size:.92em}
-.num{font-variant-numeric:tabular-nums}
-section{display:flex;flex-direction:column;gap:20px}
-.sechead{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--rule);padding-top:18px}
+html{background:var(--paper);color:var(--ink);font:15px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+body{margin:0}
+main{max-width:1040px;margin:0 auto;padding:48px 24px 80px}
+a{color:inherit;text-decoration-color:var(--faint);text-underline-offset:2px}
+a:hover{text-decoration-color:var(--accent);color:var(--accent)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+.eyebrow{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font:800 clamp(40px,7vw,68px)/.95 var(--display);font-stretch:70%;letter-spacing:-.01em;margin:14px 0 10px}
+h2{font:700 13px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 18px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+h2 small{font:400 13px var(--sans);letter-spacing:0;text-transform:none;color:var(--faint)}
+section{margin-top:64px}
+.ref{font:500 10.5px var(--mono);color:var(--faint);text-decoration:none;margin-left:4px;vertical-align:1px}
+.ref:hover{color:var(--accent)}
+
+.top{display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:end}
+.role{color:var(--muted);margin:0}
+.tenure svg{width:100%;height:auto;display:block}
+.tenure .cap{display:flex;justify-content:space-between;font:12px var(--mono);color:var(--muted);margin-top:6px}
+
+.stats{display:grid;grid-template-columns:repeat(5,1fr);border-top:2px solid var(--ink)}
+.stat{padding:16px 16px 18px 0;border-right:1px solid var(--rule);margin-right:16px}
+.stat:last-child{border-right:0;margin-right:0}
+.stat .k{font:500 12px var(--sans);color:var(--muted);min-height:2.6em}
+.stat .v{font:700 44px/1 var(--display);font-stretch:75%;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.stat .d{font:12px var(--mono);color:var(--muted);min-height:1.4em}
+.stat .d.up{color:var(--accent)} .stat .d.down{color:var(--warn)}
+.stat svg{display:block;width:100%;height:24px;margin-top:10px;overflow:visible}
+.stat .cmp{font:11.5px/1.4 var(--mono);color:var(--muted);margin-top:4px}
+
+.chart{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:16px 16px 10px}
+.chart svg{display:block;width:100%;height:auto}
+.legend{display:flex;gap:18px;font:12px var(--mono);color:var(--muted);margin-top:8px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+
+.proj{border-top:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:96px 1fr 210px 150px;gap:20px;padding:16px 0;border-bottom:1px solid var(--rule);align-items:start}
+.pill{display:inline-block;font:500 11px/1 var(--mono);padding:5px 7px;border-radius:3px;white-space:nowrap}
+.pill.shipped,.pill.resolved{background:var(--accent-soft);color:var(--accent)}
+.pill.review{background:#e6e8f0;color:#3c4a78}
+.pill.open{background:var(--warn-soft);color:var(--warn)}
+.pill.spotted{background:#ece9e1;color:#5c584f}
+.when{font:12px var(--mono);color:var(--muted);margin-top:6px}
+.name{font:600 16px/1.3 var(--sans)}
+.name .key{font:12px var(--mono);color:var(--muted);font-weight:400;margin-left:6px}
+.what{color:var(--muted);margin-top:2px}
+.cav{font-size:13px;color:var(--warn);margin-top:6px}
+.cav::before{content:"△ ";font-size:11px}
+.proof .p{font:700 26px/1 var(--display);font-stretch:75%}
+.proof .s{font-size:12.5px;color:var(--muted);margin-top:4px}
+.prs{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+.prs a{font:12px var(--mono);border:1px solid var(--rule);background:var(--card);padding:2px 6px;border-radius:3px;text-decoration:none}
+
+.usage{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.usage .t{font:600 14px var(--sans)} .usage .u{font:12px var(--mono);color:var(--muted);margin-bottom:8px}
+
+.kudos{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px;border-top:2px solid var(--ink)}
+.kudo{padding:14px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:160px 1fr;gap:12px}
+.kudo .m{font:12px/1.4 var(--mono);color:var(--muted)} .kudo .m b{display:block;color:var(--ink);font-weight:500}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+ul.plain{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+ul.plain li{padding:11px 0 11px 26px;border-bottom:1px solid var(--rule);position:relative}
+ul.plain li::before{position:absolute;left:2px;top:11px;font:13px var(--mono)}
+ul.weak li::before{content:"△";color:var(--warn)}
+ul.next li::before{content:"○";color:var(--muted)}
+ul.next li.done::before{content:"●";color:var(--accent)}
+ul.next li.done{color:var(--muted);text-decoration:line-through}
+
+details{border-top:2px solid var(--ink)}
+summary{cursor:pointer;padding:14px 0;font:600 14px var(--sans);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:" +";color:var(--muted);font-family:var(--mono)}
+details[open] summary::after{content:" −"}
+table{border-collapse:collapse;width:100%;font-size:13px}
+td{border-top:1px solid var(--rule);padding:9px 10px 9px 0;vertical-align:top}
+td:first-child{font:500 12px var(--mono);color:var(--muted);width:44px}
+td:nth-child(2){width:36%}
+td .k{display:block;color:var(--faint);font-size:12px}
+tr:target td{background:var(--accent-soft)}
+.cov{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:8px 0 20px}
+.cov div{font-size:13px;color:var(--muted)} .cov b{display:block;color:var(--ink);font-weight:600}
+.cov .lvl{font:11px var(--mono);margin-left:6px;font-weight:400} .cov .ok{color:var(--accent)} .cov .part,.cov .bad{color:var(--warn)}
+footer{margin-top:48px;font-size:12.5px;color:var(--muted)}
+
+@media (max-width:860px){
+  .top{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)} .stat{border-right:0;margin-right:16px;border-bottom:1px solid var(--rule)}
+  .row{grid-template-columns:1fr;gap:8px} .prs{justify-content:flex-start}
+  .usage,.kudos,.two,.cov{grid-template-columns:1fr}
+  .tl .scroll{overflow-x:auto} .tl svg{min-width:720px}
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <div class="eyebrow" id="asof"></div>
+      <h1>Anselm Long<br>on Maps.gov.sg</h1>
+      <p class="role" id="role"></p>
+    </div>
+    <div class="tenure" aria-label="Internship progress"><svg id="tenure" viewBox="0 0 340 40"></svg><div class="cap" id="tenurecap"></div></div>
+  </header>
+
+  <section aria-label="Headline numbers" style="margin-top:44px"><div class="stats" id="stats"></div></section>
+
+  <section><h2>Every PR <small id="prsum"></small></h2><div class="chart tl"><div class="scroll"><svg id="timeline"></svg></div>
+    <div class="legend"><span><i style="background:var(--accent)"></i>merged</span><span><i style="border:2px solid var(--accent)"></i>open</span><span><i style="border:2px solid var(--faint)"></i>closed</span><span>size = lines changed</span></div></div></section>
+
+  <section><h2>Projects</h2><div class="proj" id="projects"></div></section>
+
+  <section><h2>Usage after launch <small>PostHog production, team excluded</small></h2><div class="usage" id="usage"></div></section>
+
+  <section><h2>What people said</h2><div class="kudos" id="kudos"></div></section>
+
+  <section class="two">
+    <div><h2>Weak spots</h2><ul class="plain weak" id="weak"></ul></div>
+    <div><h2>Next</h2><ul class="plain next" id="next"></ul></div>
+  </section>
+
+  <section><details id="sources"><summary>Sources behind every number</summary><div class="cov" id="cov"></div><table><tbody id="ledger"></tbody></table></details></section>
+
+  <footer id="foot"></footer>
+</main>
+<script>
+const V = {"as_of": "2026-11-06", "start": "2026-08-17", "tenure_weeks": 11.57, "prs": [{"number": 808, "title": "feat(web): style markers panel help control (MAPS-452)", "url": "https://github.com/opengovsg/maps/pull/808", "state": "closed", "created": "2026-08-19", "merged": null, "additions": 739, "deletions": 196, "theme": "Onboarding", "ttm_hours": null}, {"number": 812, "title": "feat(web): style markers panel help control (MAPS-452)", "url": "https://github.com/opengovsg/maps/pull/812", "state": "merged", "created": "2026-08-20", "merged": "2026-08-26", "additions": 257, "deletions": 8, "theme": "Onboarding", "ttm_hours": 140.1}, {"number": 821, "title": "fix(web): don't mark session cookie Secure outside prod/staging", "url": "https://github.com/opengovsg/maps/pull/821", "state": "closed", "created": "2026-08-28", "merged": null, "additions": 16, "deletions": 1, "theme": "Other", "ttm_hours": null}, {"number": 822, "title": "docs(web): note Safari localhost cookie known issue", "url": "https://github.com/opengovsg/maps/pull/822", "state": "closed", "created": "2026-08-28", "merged": null, "additions": 7, "deletions": 0, "theme": "Onboarding", "ttm_hours": null}, {"number": 824, "title": "docs: note Safari localhost cookie known issue in README", "url": "https://github.com/opengovsg/maps/pull/824", "state": "merged", "created": "2026-08-28", "merged": "2026-08-28", "additions": 2, "deletions": 0, "theme": "Onboarding", "ttm_hours": 2.4}, {"number": 825, "title": "feat(admin-map): map any CSV, fix postal codes (MAPS-471, MAPS-470)", "url": "https://github.com/opengovsg/maps/pull/825", "state": "closed", "created": "2026-08-28", "merged": null, "additions": 10788, "deletions": 55, "theme": "CSV ingestion", "ttm_hours": null}, {"number": 826, "title": "feat(web): suggest and fix truncated 5-digit postal codes (MAPS-470)", "url": "https://github.com/opengovsg/maps/pull/826", "state": "closed", "created": "2026-08-28", "merged": null, "additions": 810, "deletions": 23, "theme": "CSV ingestion", "ttm_hours": null}, {"number": 847, "title": "feat(admin-map): custom CSV import with column-mapper UI (MAPS-472)", "url": "https://github.com/opengovsg/maps/pull/847", "state": "closed", "created": "2026-09-08", "merged": null, "additions": 13516, "deletions": 56, "theme": "CSV ingestion", "ttm_hours": null}, {"number": 851, "title": "feat(admin-map): accept .xlsx/.docx/.pdf tables in custom CSV import (MAPS-497)", "url": "https://github.com/opengovsg/maps/pull/851", "state": "closed", "created": "2026-09-10", "merged": null, "additions": 51645, "deletions": 34939, "theme": "CSV ingestion", "ttm_hours": null}, {"number": 855, "title": "feat(web): transfer map ownership to an existing editor (MAPS-510)", "url": "https://github.com/opengovsg/maps/pull/855", "state": "merged", "created": "2026-09-14", "merged": "2026-10-08", "additions": 989, "deletions": 35, "theme": "Map ownership transfer", "ttm_hours": 573.9}, {"number": 861, "title": "fix(web): mobile map marker touch targets and tap-to-zoom (MAPS-513)", "url": "https://github.com/opengovsg/maps/pull/861", "state": "merged", "created": "2026-09-15", "merged": "2026-10-13", "additions": 1662, "deletions": 199, "theme": "Stacked markers & map UX", "ttm_hours": 670.5}, {"number": 862, "title": "fix(web): upgrade @opengovsg/confetti to 0.9.x (MAPS-440)", "url": "https://github.com/opengovsg/maps/pull/862", "state": "merged", "created": "2026-09-16", "merged": "2026-09-21", "additions": 201, "deletions": 15, "theme": "Tech debt & polish", "ttm_hours": 120.1}, {"number": 865, "title": "feat(web): editable share link with inline slug editor (MAPS-520)", "url": "https://github.com/opengovsg/maps/pull/865", "state": "closed", "created": "2026-09-18", "merged": null, "additions": 1015, "deletions": 199, "theme": "Editable map link", "ttm_hours": null}, {"number": 866, "title": "feat(web): editable share link with inline slug editor (MAPS-520)", "url": "https://github.com/opengovsg/maps/pull/866", "state": "closed", "created": "2026-09-18", "merged": null, "additions": 1463, "deletions": 387, "theme": "Editable map link", "ttm_hours": null}, {"number": 868, "title": "feat(map): stacked markers engine and group sidebar (MAPS-524)", "url": "https://github.com/opengovsg/maps/pull/868", "state": "merged", "created": "2026-09-21", "merged": "2026-10-08", "additions": 3085, "deletions": 652, "theme": "Stacked markers & map UX", "ttm_hours": 403.2}, {"number": 875, "title": "feat(web): edit the map link inline on the publish page (MAPS-520)", "url": "https://github.com/opengovsg/maps/pull/875", "state": "merged", "created": "2026-09-24", "merged": "2026-10-01", "additions": 902, "deletions": 416, "theme": "Editable map link", "ttm_hours": 165.2}, {"number": 877, "title": "fix(web): open google maps on the marker's name and address (MAPS-519)", "url": "https://github.com/opengovsg/maps/pull/877", "state": "merged", "created": "2026-09-27", "merged": "2026-10-13", "additions": 79, "deletions": 18, "theme": "Google Maps links", "ttm_hours": 376.6}, {"number": 887, "title": "docs(guide): change the map link from the Publish page (MAPS-520)", "url": "https://github.com/opengovsg/maps/pull/887", "state": "merged", "created": "2026-10-01", "merged": "2026-10-08", "additions": 36, "deletions": 16, "theme": "Editable map link", "ttm_hours": 168.5}, {"number": 892, "title": "docs(guide): document transferring map ownership (MAPS-592)", "url": "https://github.com/opengovsg/maps/pull/892", "state": "merged", "created": "2026-10-07", "merged": "2026-10-08", "additions": 34, "deletions": 3, "theme": "Map ownership transfer", "ttm_hours": 21.8}, {"number": 896, "title": "fix(web): name previous owner in transfer email (MAPS-510)", "url": "https://github.com/opengovsg/maps/pull/896", "state": "merged", "created": "2026-10-08", "merged": "2026-10-08", "additions": 18, "deletions": 6, "theme": "Map ownership transfer", "ttm_hours": 0.4}, {"number": 905, "title": "fix(web): keep stack rings steady while zooming (MAPS-599)", "url": "https://github.com/opengovsg/maps/pull/905", "state": "merged", "created": "2026-10-13", "merged": "2026-10-20", "additions": 1379, "deletions": 926, "theme": "Stacked markers & map UX", "ttm_hours": 173.3}, {"number": 907, "title": "feat(admin-map): v2 csv ingestion with live map and row checks (MAPS-497)", "url": "https://github.com/opengovsg/maps/pull/907", "state": "open", "created": "2026-10-13", "merged": null, "additions": 49602, "deletions": 986, "theme": "CSV ingestion", "ttm_hours": null}, {"number": 911, "title": "feat(web): record search outcomes and sidebar picks (MAPS-609)", "url": "https://github.com/opengovsg/maps/pull/911", "state": "merged", "created": "2026-10-14", "merged": "2026-10-14", "additions": 152, "deletions": 14, "theme": "Search", "ttm_hours": 1.1}, {"number": 912, "title": "feat(web): search dropdown with places, areas and markers (MAPS-609)", "url": "https://github.com/opengovsg/maps/pull/912", "state": "open", "created": "2026-10-14", "merged": null, "additions": 10138, "deletions": 1973, "theme": "Search", "ttm_hours": null}, {"number": 913, "title": "chore(design-system): remove the unused Radix toast stack (MAPS-615)", "url": "https://github.com/opengovsg/maps/pull/913", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 3, "deletions": 483, "theme": "Tech debt & polish", "ttm_hours": 22.7}, {"number": 914, "title": "fix(web): steady marker card selection (MAPS-559, MAPS-560)", "url": "https://github.com/opengovsg/maps/pull/914", "state": "merged", "created": "2026-10-14", "merged": "2026-10-20", "additions": 49, "deletions": 5, "theme": "Stacked markers & map UX", "ttm_hours": 146.8}, {"number": 915, "title": "chore(web): remove commented-out landing search code (MAPS-614)", "url": "https://github.com/opengovsg/maps/pull/915", "state": "closed", "created": "2026-10-14", "merged": null, "additions": 0, "deletions": 23, "theme": "Tech debt & polish", "ttm_hours": null}, {"number": 916, "title": "fix(design-system): flip the masthead arrow when open (MAPS-611)", "url": "https://github.com/opengovsg/maps/pull/916", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 4, "deletions": 4, "theme": "Tech debt & polish", "ttm_hours": 23.2}, {"number": 917, "title": "fix(web): suppress the hydration warning on <html> (MAPS-612)", "url": "https://github.com/opengovsg/maps/pull/917", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 2, "deletions": 0, "theme": "Tech debt & polish", "ttm_hours": 22.8}, {"number": 918, "title": "fix(web): add one-time-code hints to sign-in code inputs (MAPS-604)", "url": "https://github.com/opengovsg/maps/pull/918", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 8, "deletions": 0, "theme": "Tech debt & polish", "ttm_hours": 22.9}, {"number": 919, "title": "fix(web): show resend links and spinner in brand green (MAPS-610)", "url": "https://github.com/opengovsg/maps/pull/919", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 6, "deletions": 6, "theme": "Tech debt & polish", "ttm_hours": 23.3}, {"number": 920, "title": "refactor(web): load fonts once and add colour tokens (MAPS-607)", "url": "https://github.com/opengovsg/maps/pull/920", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 97, "deletions": 37, "theme": "Tech debt & polish", "ttm_hours": 29.7}, {"number": 921, "title": "docs: make feature flags optional for new behavior", "url": "https://github.com/opengovsg/maps/pull/921", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 12, "deletions": 9, "theme": "Tech debt & polish", "ttm_hours": 22.3}, {"number": 922, "title": "feat(web): record stacked-marker panel opens (MAPS-637)", "url": "https://github.com/opengovsg/maps/pull/922", "state": "merged", "created": "2026-10-14", "merged": "2026-10-26", "additions": 266, "deletions": 20, "theme": "Stacked markers & map UX", "ttm_hours": 284.0}, {"number": 923, "title": "fix(web): redirect /faq to the officer guide FAQ (MAPS-613)", "url": "https://github.com/opengovsg/maps/pull/923", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 4, "deletions": 4, "theme": "Tech debt & polish", "ttm_hours": 15.8}, {"number": 925, "title": "Revert \"fix(web): show resend links and spinner in brand green (MAPS-610)\"", "url": "https://github.com/opengovsg/maps/pull/925", "state": "merged", "created": "2026-10-15", "merged": "2026-10-15", "additions": 6, "deletions": 6, "theme": "Tech debt & polish", "ttm_hours": 7.6}, {"number": 935, "title": "fix(web): ask users to contact support when OTP send fails (MAPS-555)", "url": "https://github.com/opengovsg/maps/pull/935", "state": "merged", "created": "2026-10-20", "merged": "2026-10-23", "additions": 8, "deletions": 1, "theme": "Support & reliability", "ttm_hours": 65.4}, {"number": 936, "title": "fix(web): collapse marker cards at rest to a summary (MAPS-654)", "url": "https://github.com/opengovsg/maps/pull/936", "state": "open", "created": "2026-10-20", "merged": null, "additions": 1940, "deletions": 311, "theme": "Stacked markers & map UX", "ttm_hours": null}, {"number": 939, "title": "fix(web): stop stale stack bubbles after area filter (MAPS-659)", "url": "https://github.com/opengovsg/maps/pull/939", "state": "merged", "created": "2026-10-22", "merged": "2026-10-30", "additions": 37, "deletions": 22, "theme": "Stacked markers & map UX", "ttm_hours": 190.9}, {"number": 943, "title": "fix(deps): patch critical next and dompurify advisories", "url": "https://github.com/opengovsg/maps/pull/943", "state": "merged", "created": "2026-10-23", "merged": "2026-10-23", "additions": 68, "deletions": 66, "theme": "Support & reliability", "ttm_hours": 0.1}, {"number": 944, "title": "fix(web): super admin preview scroll, filters, debug aids (MAPS-661)", "url": "https://github.com/opengovsg/maps/pull/944", "state": "merged", "created": "2026-10-23", "merged": "2026-11-03", "additions": 860, "deletions": 137, "theme": "Tech debt & polish", "ttm_hours": 263.5}, {"number": 946, "title": "fix(web): show resend links and spinner in brand green (MAPS-610)", "url": "https://github.com/opengovsg/maps/pull/946", "state": "merged", "created": "2026-10-26", "merged": "2026-10-26", "additions": 6, "deletions": 6, "theme": "Tech debt & polish", "ttm_hours": 0.6}, {"number": 955, "title": "chore(skills): remove dated prompt patterns and stale facts", "url": "https://github.com/opengovsg/maps/pull/955", "state": "merged", "created": "2026-10-30", "merged": "2026-10-30", "additions": 29, "deletions": 28, "theme": "Dev tooling & agent skills", "ttm_hours": 2.6}, {"number": 958, "title": "fix(web): marker list holds up on real-world data (MAPS-673)", "url": "https://github.com/opengovsg/maps/pull/958", "state": "merged", "created": "2026-10-30", "merged": "2026-11-03", "additions": 483, "deletions": 34, "theme": "Stacked markers & map UX", "ttm_hours": 95.7}, {"number": 966, "title": "fix(web): scroll-to-top reaches the top in one click (MAPS-675)", "url": "https://github.com/opengovsg/maps/pull/966", "state": "open", "created": "2026-11-04", "merged": null, "additions": 3, "deletions": 1, "theme": "Tech debt & polish", "ttm_hours": null}, {"number": 967, "title": "fix(web): overlay sidebar scrollbar on the marker list (MAPS-678)", "url": "https://github.com/opengovsg/maps/pull/967", "state": "open", "created": "2026-11-04", "merged": null, "additions": 207, "deletions": 62, "theme": "Stacked markers & map UX", "ttm_hours": null}], "counts": {"merged": 31, "open": 5, "closed": 10}, "merged_lines": {"additions": 10744, "deletions": 3176}, "small_merged": 9, "merged_by_week": {"2026-W35": 2, "2026-W39": 1, "2026-W40": 1, "2026-W41": 5, "2026-W42": 12, "2026-W43": 4, "2026-W44": 4, "2026-W45": 2}, "themes": {"Onboarding": {"merged": 2, "open": 0, "closed": 2, "lines_merged": 267}, "Other": {"merged": 0, "open": 0, "closed": 1, "lines_merged": 0}, "CSV ingestion": {"merged": 0, "open": 1, "closed": 4, "lines_merged": 0}, "Map ownership transfer": {"merged": 3, "open": 0, "closed": 0, "lines_merged": 1085}, "Stacked markers & map UX": {"merged": 7, "open": 2, "closed": 0, "lines_merged": 8819}, "Tech debt & polish": {"merged": 12, "open": 1, "closed": 1, "lines_merged": 1916}, "Editable map link": {"merged": 2, "open": 0, "closed": 2, "lines_merged": 1370}, "Google Maps links": {"merged": 1, "open": 0, "closed": 0, "lines_merged": 97}, "Search": {"merged": 1, "open": 1, "closed": 0, "lines_merged": 166}, "Support & reliability": {"merged": 2, "open": 0, "closed": 0, "lines_merged": 143}, "Dev tooling & agent skills": {"merged": 1, "open": 0, "closed": 0, "lines_merged": 57}}, "reviews_given": 5, "gh_baseline": {"population": "Human authors who opened >=1 PR in opengovsg/maps since 2026-08-17; bots and agent accounts (bantu-bot, claude, cursor, dependabot, github-actions, renovate) excluded. Rates normalised per week since the later of 2026-08-17 and the author's first PR in the repo.", "n_authors": 7, "merged_per_week": {"n": 7, "p25": 0.3, "median": 0.6, "p75": 2.99, "me": 2.78, "share_at_or_below_me": 71}, "median_ttm_hours": {"n": 5, "p25": 24.9, "median": 26.12, "p75": 29.67, "me": 29.67, "share_at_or_below_me": 80}, "reviews_per_week": {"n": 7, "p25": 0.0, "median": 0.0, "p75": 0.57, "me": 0.54, "share_at_or_below_me": 71}, "lines_merged": {"n": 7, "p25": 45.0, "median": 8659.0, "p75": 16882.5, "me": 13920, "share_at_or_below_me": 71}}, "linear": {"assigned": 62, "completed": 33, "per_week": 2.895, "cycle_days": 6.866, "lead_days": 11.744, "in_flight": 18, "created": 73, "baseline": {"n_assignees": 5, "completed_per_week": {"p25": 1.988, "median": 2.16, "p75": 2.895}, "median_cycle_days": 6.983}}, "posthog": [{"feature": "Stacked markers engine (MAPS-524) -- group panel opens via tracking from MAPS-637", "event": "stacked_marker_group_opened", "launch_date": "2026-10-27", "weekly": [{"week_starting": "2026-09-06", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-13", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-20", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-27", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-04", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-11", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-18", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-25", "count": 648, "unique_users": 203}, {"week_starting": "2026-11-01", "count": 599, "unique_users": 286, "partial_week": true}], "daily": [{"day": "2026-10-27", "count": 204, "unique_users": 32}, {"day": "2026-10-28", "count": 102, "unique_users": 51}, {"day": "2026-10-29", "count": 197, "unique_users": 43}, {"day": "2026-10-30", "count": 63, "unique_users": 39}, {"day": "2026-10-31", "count": 82, "unique_users": 44}, {"day": "2026-11-01", "count": 104, "unique_users": 58}, {"day": "2026-11-02", "count": 88, "unique_users": 38}, {"day": "2026-11-03", "count": 109, "unique_users": 51}, {"day": "2026-11-04", "count": 109, "unique_users": 61}, {"day": "2026-11-05", "count": 101, "unique_users": 47}, {"day": "2026-11-06", "count": 88, "unique_users": 34, "partial_day": true}], "pr_url": "https://github.com/opengovsg/maps/pull/922"}, {"feature": "Transfer ownership of a private map (MAPS-510)", "event": "map_ownership_transferred", "launch_date": "2026-10-08", "weekly": [{"week_starting": "2026-09-06", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-13", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-20", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-27", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-04", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-11", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-18", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-25", "count": 1, "unique_users": 1}, {"week_starting": "2026-11-01", "count": 0, "unique_users": 0, "partial_week": true}], "daily": null, "pr_url": "https://github.com/opengovsg/maps/pull/855"}, {"feature": "Search outcomes tracking (MAPS-609, PR #911) -- context only", "event": "search_performed", "launch_date": "2026-10-14", "weekly": [{"week_starting": "2026-09-06", "count": 14373, "unique_users": 3315}, {"week_starting": "2026-09-13", "count": 8454, "unique_users": 1775}, {"week_starting": "2026-09-20", "count": 7670, "unique_users": 1634}, {"week_starting": "2026-09-27", "count": 9048, "unique_users": 1858}, {"week_starting": "2026-10-04", "count": 11622, "unique_users": 2527}, {"week_starting": "2026-10-11", "count": 13818, "unique_users": 3187}, {"week_starting": "2026-10-18", "count": 9460, "unique_users": 1986}, {"week_starting": "2026-10-25", "count": 8760, "unique_users": 1912}, {"week_starting": "2026-11-01", "count": 7091, "unique_users": 1449, "partial_week": true}], "daily": null, "pr_url": "https://github.com/opengovsg/maps/pull/911"}], "slack_by_week": {"2026-W34": 38, "2026-W35": 25, "2026-W36": 24, "2026-W37": 56, "2026-W38": 58, "2026-W39": 82, "2026-W40": 52, "2026-W41": 33, "2026-W42": 28, "2026-W43": 47, "2026-W44": 65, "2026-W45": 52}, "slack_public_total": 560, "slack_maps": 410, "notion_authored": 107, "now": {"merged": 31, "lines": 13920, "merged_per_week": 2.78, "linear_done": 33, "linear_per_week": 2.895, "reviews": 5, "in_flight": 18}, "prev": {"merged": 29, "lines": 12406, "merged_per_week": 2.86, "linear_done": 32, "linear_per_week": 3.078, "reviews": 3, "in_flight": 17}, "prev_as_of": "2026-10-30", "content": {"_readme": "Hand-maintained facts for the dashboard. The Friday refresh edits THIS file (not template.html). Every item cites ledger refs; keep text short: a label and a number, not a paragraph. Statuses: shipped | resolved | review | open | spotted.", "role": "Software engineering intern \u00b7 Maps team \u00b7 Open Government Products", "end_date": "2027-02-05", "caught_before_release": {"value": 79, "ref": "E11", "note": "severity-tagged issues across 5 UAT and bug-bash docs"}, "projects": [{"name": "Stacked markers", "key": "MAPS-524", "status": "shipped", "date": "8 Oct", "what": "Markers at one spot collapse into a count bubble", "proof": "1,247 opens", "proof_sub": "by 486 people on 20 maps, first 11 days", "refs": ["E16", "E11", "E22", "E24"], "prs": [{"n": 868, "url": "https://github.com/opengovsg/maps/pull/868"}, {"n": 905, "url": "https://github.com/opengovsg/maps/pull/905"}, {"n": 914, "url": "https://github.com/opengovsg/maps/pull/914"}, {"n": 922, "url": "https://github.com/opengovsg/maps/pull/922"}, {"n": 939, "url": "https://github.com/opengovsg/maps/pull/939"}, {"n": 958, "url": "https://github.com/opengovsg/maps/pull/958"}], "caveat": "toSorted in #922 threw on Chrome 109 (1 user) \u00b7 E25"}, {"name": "Production incident: map previews", "key": "SEV-3 1479", "status": "resolved", "date": "27 Oct", "what": "Raised it, found the Cloudflare WAF cause, cut the fix release", "proof": "~1 hour", "proof_sub": "to resolve; ~63 users affected", "refs": ["E20", "E21"], "prs": [], "caveat": "Slack only; Datadog record not cross-checked"}, {"name": "Google Maps hand-off", "key": "MAPS-519", "status": "shipped", "date": "13 Oct", "what": "\"Open in Google Maps\" searches name + address", "proof": "10% \u2192 86%", "proof_sub": "land on the right place, 638 markers", "refs": ["E5"], "prs": [{"n": 877, "url": "https://github.com/opengovsg/maps/pull/877"}], "caveat": "Self-reported benchmark"}, {"name": "Map ownership transfer", "key": "MAPS-510", "status": "shipped", "date": "8 Oct", "what": "Owner hands a private map to an editor", "proof": "10 issues", "proof_sub": "caught in his 18-case UAT before release", "refs": ["E11", "E16"], "prs": [{"n": 855, "url": "https://github.com/opengovsg/maps/pull/855"}, {"n": 896, "url": "https://github.com/opengovsg/maps/pull/896"}, {"n": 892, "url": "https://github.com/opengovsg/maps/pull/892"}], "caveat": "Only 2 transfers in production so far (1 outside the team)"}, {"name": "Editable map link", "key": "MAPS-520", "status": "shipped", "date": "1 Oct", "what": "Edit the map link inline on the publish page", "proof": "2 PRs", "proof_sub": "feature + officer guide", "refs": ["E2", "E3"], "prs": [{"n": 875, "url": "https://github.com/opengovsg/maps/pull/875"}, {"n": 887, "url": "https://github.com/opengovsg/maps/pull/887"}], "caveat": ""}, {"name": "Tech-debt sweep", "key": "Audit", "status": "shipped", "date": "15 Oct", "what": "Hydration warning, double font load, dead code, more", "proof": "12 merges", "proof_sub": "in week 42, most under 100 lines", "refs": ["E1"], "prs": [{"n": 919, "url": "https://github.com/opengovsg/maps/pull/919"}, {"n": 946, "url": "https://github.com/opengovsg/maps/pull/946"}, {"n": 944, "url": "https://github.com/opengovsg/maps/pull/944"}], "caveat": "#919 reverted same day, re-landed as #946"}, {"name": "Locate Me on the most-viewed map", "key": "SEV-4 1458", "status": "spotted", "date": "17 Oct", "what": "Found and diagnosed the broken embed", "proof": "SEV-4", "proof_sub": "declared by the team on 19 Oct", "refs": ["E18"], "prs": [], "caveat": "Spotted, not owned or fixed"}, {"name": "Smarter search", "key": "MAPS-609", "status": "review", "date": "UAT done", "what": "One dropdown for places, areas and markers", "proof": "21 issues", "proof_sub": "from his UAT, 3 rounds", "refs": ["E11", "E29", "E30"], "prs": [{"n": 912, "url": "https://github.com/opengovsg/maps/pull/912"}, {"n": 911, "url": "https://github.com/opengovsg/maps/pull/911"}], "caveat": "Code review open; release slipped to 11\u201312 Nov"}, {"name": "Compact sidebar", "key": "MAPS-654", "status": "review", "date": "Open since 20 Oct", "what": "Cards collapse to a summary so more fit on screen", "proof": "\u221252% scroll", "proof_sub": "median on the 29 busiest maps (his estimate)", "refs": ["E26"], "prs": [{"n": 936, "url": "https://github.com/opengovsg/maps/pull/936"}, {"n": 966, "url": "https://github.com/opengovsg/maps/pull/966"}, {"n": 967, "url": "https://github.com/opengovsg/maps/pull/967"}], "caveat": ""}, {"name": "Enhanced CSV ingestion", "key": "MAPS-471", "status": "open", "date": "Target end Nov", "what": "Map any CSV, fix rows on a live map", "proof": "41% \u2192 ?", "proof_sub": "uploads that error today (407 of 989)", "refs": ["E6", "E7", "E8", "E9", "E23", "E27"], "prs": [{"n": 907, "url": "https://github.com/opengovsg/maps/pull/907"}], "caveat": "Unmerged; #907 is ~50.6k lines; ownership not confirmed in writing"}], "kudos": [{"who": "Manager", "where": "#maps", "date": "27 Oct", "said": "\u201cfor raising and resolving your first incident\u201d", "ref": "E20"}, {"who": "Manager", "where": "#eng", "date": "27 Oct", "said": "Credited him by name for spotting and debugging the SEV-3", "ref": "E21"}, {"who": "Manager", "where": "#applied-experiments", "date": "6 Nov", "said": "Shout-out for improving user experience", "ref": "E29"}, {"who": "Designer", "where": "#maps", "date": "6 Nov", "said": "Thanks for paving the way for data ingestion", "ref": "E29"}, {"who": "PM", "where": "#maps", "date": "5 Nov", "said": "Thanks for the search UAT round-three fixes", "ref": "E29"}, {"who": "Designer", "where": "#maps", "date": "15 Oct", "said": "Thanks for taking the initiative on an issue", "ref": "E13"}, {"who": "Manager", "where": "#maps", "date": "2 Oct", "said": "Thanks for holding the fort while out of office", "ref": "E12"}], "weak_spots": [{"text": "Ingestion unmerged after 2 months", "ref": "E9"}, {"text": "Merge rate just under team p75 (2.78 vs 2.99)", "ref": "E1"}, {"text": "18 Linear issues started at once", "ref": "E17"}, {"text": "1 same-day revert", "ref": "E1"}, {"text": "Ownership transfer barely used (2 events); search_suggestion_selected missing in prod", "ref": "E16"}, {"text": "Stacked-marker data: 11 days, no before-number", "ref": "E16"}, {"text": "Search release slipped", "ref": "E30"}], "next": [{"text": "Land ingestion in slices; confirm ownership in writing", "done": false}, {"text": "Re-measure ingestion after launch (25m 11s, 41% errors today)", "done": false}, {"text": "Fix tracking gaps and the toSorted error", "done": false}, {"text": "Review 1\u20132 teammate PRs a week", "done": false}, {"text": "Cut in-flight issues; ask manager and designer for written feedback", "done": false}], "ledger": [{"ref": "E1", "source": "GitHub GraphQL, all 916 PRs in opengovsg/maps<span class=\"k\">collect_github.py, analyze.py</span>", "shows": "31 merged, 5 open, 10 closed. 5 reviews of teammates' PRs, including <a href=\"https://github.com/opengovsg/maps/pull/957\">#957</a> (2 Nov) and <a href=\"https://github.com/opengovsg/maps/pull/964\">#964</a> (5 Nov). Team baseline from 7 human PR authors since 17 Aug; bots and agent accounts excluded. One author's first PR was 3 Nov, so their single merge counts as 3.5 a week."}, {"ref": "E2", "source": "<a href=\"https://github.com/opengovsg/maps/pull/868\">PR #868</a>, <a href=\"https://github.com/opengovsg/maps/pull/855\">#855</a>, <a href=\"https://github.com/opengovsg/maps/pull/875\">#875</a>", "shows": "The three largest shipped features."}, {"ref": "E3", "source": "<a href=\"https://github.com/opengovsg/maps/pull/887\">PR #887</a>, <a href=\"https://github.com/opengovsg/maps/pull/892\">#892</a>", "shows": "Officer-guide updates shipped with his features."}, {"ref": "E5", "source": "<a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1791775935071139\">Slack #maps, 12 Oct</a>", "shows": "Google Maps links land on the right place 86% of the time, up from 10%, on 638 markers across 11 maps. Self-reported."}, {"ref": "E6", "source": "<a href=\"https://app.notion.com/p/3ca77dbba7888103ae9bcdb3cc77ed31\">Notion: CSV Upload Friction, Production Metrics</a>", "shows": "41% create-flow error rate (407 of 989), 48% of people hit an error, 25m 11s average at the upload step."}, {"ref": "E7", "source": "<a href=\"https://app.notion.com/p/3d577dbba78880d0841cf5687dc6c568\">Notion: Data ingestion UT</a>, <a href=\"https://app.notion.com/p/3d477dbba78880e2813fdcd930fabe64\">UT proposal</a>", "shows": "At least 4 moderated sessions with officers from SPF, NParks and NEA; 71 action items triaged P1/P2."}, {"ref": "E8", "source": "<a href=\"https://app.notion.com/p/3d677dbba78881498ff4ca95cc278fcd\">Notion: ADR, Shared LLM Gateway</a>", "shows": "20 s timeout, 6 calls a minute, 5-row egress cap, consent screen, heuristic fallback. Status: proposed."}, {"ref": "E9", "source": "<a href=\"https://github.com/opengovsg/maps/pull/907\">PR #907</a>", "shows": "v2 CSV ingestion, open, 49,602 additions and 986 deletions."}, {"ref": "E11", "source": "Notion: <a href=\"https://app.notion.com/p/3ec77dbba78880269cfdfbf195d77375\">UAT Transfer Ownership</a>, <a href=\"https://app.notion.com/p/3ec77dbba78880398060e8cfba63de81\">UAT Mobile Touch Markers</a>, <a href=\"https://app.notion.com/p/3eb77dbba78880c3b34cc288ff8c702b\">UAT Stacked Markers</a>, <a href=\"https://app.notion.com/p/3e577dbba7888048a200e92e85b2a8da\">Bug bash, Stacked Markers Preview</a>, <a href=\"https://app.notion.com/p/40577dbba7888160a848fff16f6bbc6d\">UAT Smarter Search</a>", "shows": "10 + 10 + 16 + 22 + 21 = 79 severity-tagged issues logged. The search UAT (8 high, 10 medium, 3 low; 16 done by 30 Oct) is for a feature that has not shipped yet."}, {"ref": "E12", "source": "<a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1790906960014109\">Slack #maps, 2 Oct</a>", "shows": "Manager thanks him for holding the fort while out of office."}, {"ref": "E13", "source": "<a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1792031061472299\">Slack #maps, 15 Oct</a>", "shows": "Designer thanks him for taking the initiative on an issue."}, {"ref": "E14", "source": "<a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1788857699246779\">Slack #maps, 8 Sep</a>", "shows": "Ingestion demo video after a bug bash; 63 replies."}, {"ref": "E15", "source": "Datadog monitor 335569817", "shows": "\"Maps: Postman blacklisted recipient\", created by him on 22 Oct for MAPS-555. Status OK as of 23 Oct; not re-checked on 30 Oct or 6 Nov because Datadog was unreachable. MAPS-555 moved to Done on 23 Oct when <a href=\"https://github.com/opengovsg/maps/pull/935\">#935</a> merged."}, {"ref": "E16", "source": "PostHog project 189562, \"Maps (production)\", read-only HogQL pulled 31 Oct and 6 Nov<span class=\"k\">the project's own test-account filter excludes the team</span>", "shows": "stacked_marker_group_opened: 1,247 opens by 486 people on 20 page URLs, 27 Oct to 6 Nov; 648 in the week of 25 Oct, 599 in the partial week of 1 Nov. map_ownership_transferred: 2 events ever, on 29 Oct (1 external, 1 internal). search_performed: 7,091 to 13,818 a week from external users since 11 Oct, with no step at #911; search_suggestion_selected is still absent. Everything shown before 30 Oct came from project 189206, \"Maps (local)\", which holds only test traffic, and has been withdrawn."}, {"ref": "E17", "source": "Linear, MAPS team", "shows": "62 issues assigned, 33 done, median cycle 6.87 days against a team median of 6.98. 18 are in a started state. MAPS-606 was counted done on 28 Oct and reopened on 3 Nov. Baseline: 5 assignees with completed issues since 17 Aug."}, {"ref": "E18", "source": "Slack #maps, 17 Oct; incident channel #inc-1458-10_19_2026-locate_me_fails_on_embedded_maps; Notion journal <a href=\"https://app.notion.com/p/3fe77dbba78880df8da7edde1c62fdfd\">Monday 19 Oct</a>; Datadog IR-1458", "shows": "He reported the broken Locate Me on the climate-vouchers embed. A teammate asked for a SEV-4 on 19 Oct and the incident channel was opened that day. As of 23 Oct, Datadog listed another engineer as owner and the incident was still open (stable). Not re-checked on 30 Oct or 6 Nov."}, {"ref": "E19", "source": "<a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1792739095537729\">Slack #maps, 23 Oct</a>", "shows": "End-of-week thanks to him and one other colleague for the week's work."}, {"ref": "E20", "source": "<a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793071177489279\">Slack #maps, 27 Oct</a> (15-reply thread), <a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793074810048259\">manager's thanks</a>; incident channel #inc-1479; Notion journal <a href=\"https://app.notion.com/p/40677dbba78880f7a74dfb09d0281f83\">Tuesday 27 Oct</a>", "shows": "He reported the broken previews, asked whether to declare an incident, and posted the Cloudflare WAF root cause. SEV-3, about 11:19 to 12:19 SGT. His manager thanked him \"for raising and resolving your first incident\"."}, {"ref": "E21", "source": "<a href=\"https://opengovproducts.enterprise.slack.com/archives/CK9GGK6EP/p1793076241063399\">Slack #eng, 27 Oct</a>", "shows": "The manager's engineering-wide learning write-up credits him by name for spotting and debugging it, and gives the impact as about 63 users with no functional impact."}, {"ref": "E22", "source": "<a href=\"https://github.com/opengovsg/maps/pull/939\">PR #939</a>; Slack #maps-linear, 23 Oct (a Linear bot mirror of his comment)", "shows": "Root cause: two racing setData writes to Mapbox about 9 ms apart. His repro went from 8 of 8 runs with stale stacks to 0 of 8. Self-reported. Merged 30 Oct."}, {"ref": "E23", "source": "Notion journals <a href=\"https://app.notion.com/p/3fe77dbba78880df8da7edde1c62fdfd\">Friday 23 Oct</a>, <a href=\"https://app.notion.com/p/40877dbba788804490f2d0b06dc17113\">Thursday 29 Oct</a> and <a href=\"https://app.notion.com/p/40e77dbba7888063b649cdff9cb9a028\">Thursday 5 Nov</a>; Slack #maps-linear, 5 Nov", "shows": "On 23 Oct he handed the ingestion flow to a teammate to explore. On 29 Oct, prototyping the ingestion redesign was still on his to-do list. On 5 Nov MAPS-471 was updated with him as assignee, and the project sync targeted end of November."}, {"ref": "E24", "source": "<a href=\"https://github.com/opengovsg/maps/pull/958\">PR #958</a>; <a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793696993649649\">Slack #maps, 3 Nov</a>", "shows": "Marker list fixed for long names, badges, distances and counts (MAPS-673), found with his /break-ui stress test. The designer gave her OK on 2 Nov and the manager approved on 3 Nov. Merged 3 Nov."}, {"ref": "E25", "source": "Slack #evitan, 3 Nov (PostHog error-tracking bot); <a href=\"https://github.com/opengovsg/maps/pull/922\">PR #922</a> diff", "shows": "TypeError on Chrome 109 when clicking a stacked-marker bubble: the tracking calls Array.prototype.toSorted. The call was added in #922. 1 event from 1 user at the time of the post."}, {"ref": "E26", "source": "<a href=\"https://app.notion.com/p/40c77dbba7888047a2a5dfd6fe925f17\">Notion: Sidebar Enhancements</a>, <a href=\"https://app.notion.com/p/40e77dbba78880aa92c2ecb71a54cdef\">Guerrilla UT, Sidebar</a>; <a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793693955746989\">Slack #maps, 3 Nov</a>", "shows": "On the 29 busiest public maps, median scroll to the end of the list: 21,300 to 8,900 px with #936 (\u221252%), labelled as estimates. A test with 3 OGP staff (names omitted): all preferred the compact design, and search blocked all of them."}, {"ref": "E27", "source": "<a href=\"https://app.notion.com/p/40c77dbba78881df88a8ed44f2d47518\">Notion: Enhanced ingestion, requirements sync prep</a>, <a href=\"https://app.notion.com/p/40d77dbba7888167a888e0291fc51c90\">prototype history</a>", "shows": "His synthesis of testing so far: 46% of officers' first uploads are rejected, and 22 of 226 maps lost rows silently. Figures as he wrote them, not re-checked. The history covers prototypes #825, #847 (closed) and #907 (open)."}, {"ref": "E28", "source": "<a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793691025932579\">Slack #maps, 3 Nov</a>; <a href=\"https://opengovproducts.enterprise.slack.com/archives/C08MCA5PXLN/p1793781180647509?thread_ts=1793772578.573409\">Slack #aed-eng, 4 Nov</a>", "shows": "Set up a Linear loop that posts release notes to #maps; its first post lists his MAPS-659 fix. Shared his competitor-design and verify-maps skills in a division-wide AI-workflow thread (5 tacos)."}, {"ref": "E29", "source": "<a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793843953605569?thread_ts=1793171214.513399\">Slack #maps, 5 Nov</a>, <a href=\"https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793937207730789?thread_ts=1793931122.752649\">6 Nov</a>; <a href=\"https://opengovproducts.enterprise.slack.com/archives/C09FLDCA8UR/p1793942972013549\">#applied-experiments, 6 Nov</a>", "shows": "The PM thanked him for the search UAT round-three fixes. The designer thanked him for paving the way for data ingestion and for joint design jams. The manager credited him and the designer for improving user experience. A second shout-out that day was shared three ways and is not counted."}, {"ref": "E30", "source": "<a href=\"https://app.notion.com/p/41077dbba78880a6b94cf67c83838be8\">Notion: Search Code Review, 6 Nov</a>; Notion journal <a href=\"https://app.notion.com/p/40e77dbba7888063b649cdff9cb9a028\">Thursday 5 Nov</a>", "shows": "Code review of #912 with his manager, not finished. Issues raised: no timeout on OneMap calls; re-ranking needs a written rationale. Release target moved from 10 Nov to 11 or 12 Nov."}], "coverage": [{"source": "GitHub", "level": "ok", "status": "Complete", "note": "All PRs and reviews in opengovsg/maps. No org-wide OGP baseline: the search API cannot group by author at that scale."}, {"source": "Linear", "level": "ok", "status": "Complete", "note": "Assigned and created issues, team completions since 17 Aug."}, {"source": "Notion", "level": "ok", "status": "Mostly", "note": "107 authored pages, about 60 of them daily journals. Creation dates were not readable; no team doc baseline."}, {"source": "Slack", "level": "part", "status": "Public only", "note": "Public messages tallied by hand from search (about \u00b15). DMs not counted or quoted."}, {"source": "PostHog", "level": "ok", "status": "Production, from 31 Oct", "note": "Maps (production), project 189562, excluding team accounts. Earlier pulls used the dev project, 189206, and were withdrawn. Stacked-marker data covers eleven days."}, {"source": "Datadog", "level": "part", "status": "Not reached 30 Oct or 6 Nov", "note": "The Datadog connector on the OGP Gateway needs its own sign-in, which was not completed this week, so these are the 23 Oct findings: two SEV-4s, 1458 (Locate Me, which he spotted but did not own or fix) and 1459, not linked to his code. The 27 Oct SEV-3 (1479) is not cross-checked."}]}};
+const C = V.content;
+const $ = id => document.getElementById(id);
+const NS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const refs = rs => (rs || []).map(r => `<a class="ref" href="#${r.toLowerCase()}">${r}</a>`).join("");
+const fmt = (n, d = 0) => Number(n).toLocaleString("en-SG", {minimumFractionDigits: d, maximumFractionDigits: d});
+const day = s => new Date(s + "T00:00:00+08:00");
+const short = s => day(s).toLocaleDateString("en-SG", {day: "numeric", month: "short", timeZone: "Asia/Singapore"});
 
 /* header */
-header{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
-.who{display:flex;flex-direction:column;gap:10px}
-.meta{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--ink2);font-size:14px}
-.weeks{display:grid;grid-template-columns:repeat(var(--n,10),1fr);gap:3px;min-width:260px}
-.weeks div{display:flex;flex-direction:column;align-items:center;gap:4px;font:500 10px var(--mono);color:var(--muted)}
-.weeks span{display:block;width:100%;height:28px;border-radius:3px;background:var(--accent);opacity:var(--o)}
-.weeks-cap{font-size:12px;color:var(--muted);margin-top:6px;text-align:right}
-@media (max-width:720px){header{grid-template-columns:1fr}.weeks-cap{text-align:left}}
-
-/* tiles */
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
-.tile{background:var(--surface);padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px}
-.tile .v{font:700 40px/1 var(--display);font-stretch:80%}
-.tile .l{font-weight:600;font-size:14px}
-.tile .s{font-size:13px;color:var(--ink2)}
-.tile .d{font:500 12px var(--mono);color:var(--muted)}
-.tile .src{font:400 11px var(--mono);color:var(--muted);margin-top:auto;padding-top:6px}
-
-/* panels */
-.panel{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:18px}
-.scroll{overflow-x:auto}
-.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--ink2);align-items:center}
-.sw{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
-.sw.merged{background:var(--accent)}
-.sw.open{border:2px solid var(--accent)}
-.sw.closed{border:2px dashed var(--closed)}
-.sw.band{border-radius:2px;width:18px;background:var(--band)}
-.sw.me{background:var(--accent);transform:rotate(45deg);border-radius:50% 50% 50% 0}
-svg text{fill:var(--muted);font:11px var(--mono)}
-svg .lab{fill:var(--ink2);font:500 12px var(--sans)}
-svg .val{fill:var(--ink);font:600 12px var(--sans)}
-svg .grid{stroke:var(--rule);stroke-width:1}
-svg .axis{stroke:var(--muted);stroke-width:1}
-svg [data-tip]{cursor:default}
-
-/* benchmark */
-.bench{display:flex;flex-direction:column;gap:4px}
-.brow{display:grid;grid-template-columns:minmax(180px,250px) 1fr;gap:16px;align-items:center;padding-block:10px;border-bottom:1px solid var(--rule)}
-.brow:last-child{border-bottom:0}
-.brow .bl{display:flex;flex-direction:column;gap:2px}
-.brow .bl b{font-weight:600;font-size:14px}
-.brow .bl small{color:var(--muted);font-size:12px}
-.brow .verdict{font-size:12px;color:var(--ink2)}
-@media (max-width:640px){.brow{grid-template-columns:1fr;gap:4px}}
-
-/* themes */
-table{border-collapse:collapse;width:100%;font-size:14px}
-th{font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule)}
-td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
-td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
-tr:last-child td{border-bottom:0}
-.chip{display:inline-flex;align-items:center;gap:5px;font:500 11px var(--mono);padding:2px 8px;border-radius:999px;white-space:nowrap}
-.chip.ok{background:var(--accent-wash);color:var(--accent-ink)}
-.chip.wip{background:var(--warn-wash);color:var(--warn)}
-
-/* features */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-.card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px}
-.card .row{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
-.card p{color:var(--ink2);font-size:14px}
-.card ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink2);display:flex;flex-direction:column;gap:4px}
-.card.flag{grid-column:1/-1;border-color:color-mix(in srgb,var(--warn) 45%,var(--rule))}
-
-/* case */
-.case{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px}
-@media (max-width:860px){.case{grid-template-columns:1fr}}
-.case ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:14px;max-width:68ch}
-.case li::marker{font:700 15px var(--display);color:var(--accent-ink)}
-.case li b{font-weight:600}
-sup a{font:500 10px var(--mono);text-decoration:none;padding-inline:1px}
-aside.gaps{background:var(--warn-wash);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;font-size:14px;align-self:start}
-aside.gaps h3{color:var(--warn)}
-aside.gaps ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
-
-/* ledger */
-.ledger td:first-child{font:500 12px var(--mono);color:var(--muted);white-space:nowrap}
-.ledger td .k{font:400 11px var(--mono);color:var(--muted);display:block}
-.ledger tr:target td{background:var(--accent-wash)}
-
-/* sources */
-.src-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
-.srcb{border:1px solid var(--rule);border-radius:8px;padding:12px 14px;background:var(--surface);display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--ink2)}
-.srcb b{color:var(--ink);font-size:14px}
-.st{font:500 11px var(--mono)}
-.st.ok{color:var(--good)} .st.part{color:var(--warn)}
-
-ol.next{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:10px;max-width:72ch}
-footer{font-size:12px;color:var(--muted);border-top:1px solid var(--rule);padding-top:14px}
-
-#tip{position:fixed;pointer-events:none;z-index:10;background:var(--ink);color:var(--surface);font-size:12px;line-height:1.4;padding:7px 9px;border-radius:6px;max-width:300px}
-@media (prefers-reduced-motion:no-preference){.weeks span{transition:opacity .2s}}
-</style>
-
-<div class="wrap">
-<header>
-  <div class="who">
-    <span class="eyebrow">Return-offer evidence file · as of <span id="asof"></span></span>
-    <h1>Anselm Long on Maps.gov.sg</h1>
-    <div class="meta">
-      <span>Software engineering intern, Maps team, Open Government Products</span>
-      <span>Started 17 Aug 2026 (Notion onboarding log, Slack welcome post)</span>
-      <span>Internship extended to 5 Feb (Slack, 8 Sep)</span>
-    </div>
-    <p class="lede">Twelve ISO weeks of work, pulled from GitHub, Linear, Notion, Slack, PostHog and Datadog. Comparisons are against the Maps team in aggregate and are normalised per week of tenure. Every figure links back to its source in the evidence ledger, and the weak spots are listed next to the strong ones.</p>
-  </div>
-  <div>
-    <div class="weeks" id="weeks" aria-label="Merged PRs per ISO week"></div>
-    <div class="weeks-cap" id="weeks-cap">Merged PRs per ISO week</div>
-  </div>
-</header>
-
-<section aria-labelledby="h-head">
-  <div class="tiles" id="tiles"></div>
-</section>
-
-<section aria-labelledby="h-bench">
-  <div class="sechead">
-    <span class="eyebrow">Benchmark</span>
-    <h2 id="h-bench">Against the Maps team, per week of tenure</h2>
-    <p class="lede">The grey band is the middle half of the team (25th to 75th percentile) and the tick is the team median. The pin is Anselm. Teams are small (n = 5 to 7 people), so treat these as direction, not rank.</p>
-  </div>
-  <div class="panel">
-    <div class="legend" style="margin-bottom:8px"><span><i class="sw band"></i>Team middle 50%</span><span><i class="sw me"></i>Anselm</span><span>| tick = team median</span></div>
-    <div class="bench" id="bench"></div>
-  </div>
-</section>
-
-<section aria-labelledby="h-time">
-  <div class="sechead">
-    <span class="eyebrow">Shipping timeline · opengovsg/maps</span>
-    <h2 id="h-time">Every PR, by project</h2>
-    <p class="lede">Filled dots sit on the merge date. Hollow dots sit on the open date of PRs that are still open or were closed without merging. Dot area grows with lines changed. Hover a dot for the PR.</p>
-  </div>
-  <div class="panel">
-    <div class="legend" style="margin-bottom:6px"><span><i class="sw merged"></i>Merged</span><span><i class="sw open"></i>Open</span><span><i class="sw closed"></i>Closed, not merged</span></div>
-    <div class="scroll"><svg id="timeline" role="img" aria-label="Timeline of Anselm's pull requests by project"></svg></div>
-  </div>
-</section>
-
-<section aria-labelledby="h-proj">
-  <div class="sechead">
-    <span class="eyebrow">Projects</span>
-    <h2 id="h-proj">What shipped, and what is still in flight</h2>
-  </div>
-  <div class="cards">
-    <article class="card">
-      <div class="row"><h3>Stacked markers</h3><span class="chip ok">Shipped 8 Oct</span></div>
-      <p>Markers at the same spot collapse into a count bubble with a group sidebar. MAPS-524.</p>
-      <ul>
-        <li>Engine PR <a href="https://github.com/opengovsg/maps/pull/868">#868</a>, 3,737 lines, plus zoom-jitter fix <a href="https://github.com/opengovsg/maps/pull/905">#905</a> and card fixes <a href="https://github.com/opengovsg/maps/pull/914">#914</a></li>
-        <li>Ran his own bug bash and UAT first: 38 severity-tagged issues across two Notion docs <sup><a href="#e11">E11</a></sup></li>
-        <li>Usage tracking (<a href="https://github.com/opengovsg/maps/pull/922">#922</a>) merged 26 Oct. In production, the first eleven days show 1,247 group-panel opens by 486 people across 20 maps, excluding the team <sup><a href="#e16">E16</a></sup></li>
-        <li>"Ghost stacks" fix <a href="https://github.com/opengovsg/maps/pull/939">#939</a> merged 30 Oct (MAPS-659). His own repro went from stale stacks in 8 of 8 runs to 0 of 8 <sup><a href="#e22">E22</a></sup></li>
-        <li>Marker-list fix <a href="https://github.com/opengovsg/maps/pull/958">#958</a> merged 3 Nov (MAPS-673). It came from his own stress test of the list with long names, badges and counts, and the designer and his manager signed off in Slack <sup><a href="#e24">E24</a></sup></li>
-        <li>The #922 tracking code uses <span class="mono">toSorted</span>, which older browsers lack. PostHog logged one error from one Chrome 109 user on 3 Nov <sup><a href="#e25">E25</a></sup></li>
-      </ul>
-    </article>
-    <article class="card">
-      <div class="row"><h3>Map ownership transfer</h3><span class="chip ok">Shipped 8 Oct</span></div>
-      <p>An owner can hand a private map to an existing editor. MAPS-510.</p>
-      <ul>
-        <li><a href="https://github.com/opengovsg/maps/pull/855">#855</a>, email fix <a href="https://github.com/opengovsg/maps/pull/896">#896</a>, officer guide <a href="https://github.com/opengovsg/maps/pull/892">#892</a></li>
-        <li>18-case UAT checklist, 10 issues logged before release <sup><a href="#e11">E11</a></sup></li>
-        <li>Production PostHog shows 2 transfers ever, both on 29 Oct (one officer, one team member), none in the three weeks after launch and none since. The launch-week figure shown before 30 Oct came from the dev project and has been withdrawn <sup><a href="#e16">E16</a></sup></li>
-      </ul>
-    </article>
-    <article class="card">
-      <div class="row"><h3>Editable map link</h3><span class="chip ok">Shipped 1 Oct</span></div>
-      <p>Officers can edit the map's link inline on the publish page. MAPS-520.</p>
-      <ul>
-        <li><a href="https://github.com/opengovsg/maps/pull/875">#875</a> and guide <a href="https://github.com/opengovsg/maps/pull/887">#887</a>; two earlier attempts closed in favour of this one</li>
-      </ul>
-    </article>
-    <article class="card">
-      <div class="row"><h3>Google Maps hand-off</h3><span class="chip ok">Shipped 13 Oct</span></div>
-      <p>"Open in Google Maps" now searches on the marker's name and address. MAPS-519.</p>
-      <ul>
-        <li><a href="https://github.com/opengovsg/maps/pull/877">#877</a>, 97 lines</li>
-        <li>His benchmark of 638 markers on 11 public maps: right place 86% of the time, up from 10% <sup><a href="#e5">E5</a></sup>. Self-reported, not independently re-run.</li>
-      </ul>
-    </article>
-    <article class="card">
-      <div class="row"><h3>Tech-debt sweep</h3><span class="chip ok">Shipped 15 Oct</span></div>
-      <p>Ten small PRs from a code audit, opened in one batch: hydration warning, double font load, one-time-code hints, dead code.</p>
-      <ul>
-        <li>Most under 100 lines. One (<a href="https://github.com/opengovsg/maps/pull/919">#919</a>, brand-green links) was reverted the same day in <a href="https://github.com/opengovsg/maps/pull/925">#925</a>, then re-landed with design sign-off on 26 Oct as <a href="https://github.com/opengovsg/maps/pull/946">#946</a></li>
-        <li>This batch is why W42 shows 12 merges</li>
-        <li>Follow-up: super-admin preview fixes (<a href="https://github.com/opengovsg/maps/pull/944">#944</a>, MAPS-661) merged 3 Nov: the preview list scrolls, with Live and Draft tabs and sorting</li>
-      </ul>
-    </article>
-    <article class="card">
-      <div class="row"><h3>Production incident: map previews</h3><span class="chip ok">Raised and resolved 27 Oct</span></div>
-      <p>He noticed that map preview images on the maps.gov.sg homepage had stopped loading, and asked the team whether to declare an incident. It became SEV-3 incident 1479.</p>
-      <ul>
-        <li>He traced the cause to an emergency Cloudflare WAF rule for a Next.js image-optimizer CVE, which the zone's override turned into a block. He then cut the pending release with the patched Next.js. It was resolved in about an hour <sup><a href="#e20">E20</a></sup></li>
-        <li>His manager's write-up in #eng credits him by name for spotting and debugging it, and puts the impact at about 63 users with no functional impact <sup><a href="#e21">E21</a></sup></li>
-        <li>Sourced from Slack only. Datadog could not be reached on 30 Oct or 6 Nov, so the incident record was not cross-checked.</li>
-      </ul>
-    </article>
-    <article class="card">
-      <div class="row"><h3>Locate Me bug on the most-viewed map</h3><span class="chip ok">Spotted 17 Oct</span></div>
-      <p>He found that the Locate Me button was broken in the climate-vouchers map embed, which brings in most of Maps' views, and reported it in #maps with a likely cause: the agency's iframe lacks geolocation permission.</p>
-      <ul>
-        <li>The team declared it a SEV-4 on 19 Oct as incident 1458, "locate me fails on embedded maps" <sup><a href="#e18">E18</a></sup></li>
-        <li>Credit here is for spotting and diagnosing it. He is not recorded as the incident owner or as the person who fixed it.</li>
-      </ul>
-    </article>
-    <article class="card">
-      <div class="row"><h3>Smarter search</h3><span class="chip wip">In UAT</span></div>
-      <p>A search dropdown covering places, areas and markers. MAPS-609.</p>
-      <ul>
-        <li><a href="https://github.com/opengovsg/maps/pull/912">#912</a> is open at 10,138 additions and 1,973 deletions. The search-outcome tracking that comes before it (<a href="https://github.com/opengovsg/maps/pull/911">#911</a>) is merged</li>
-        <li>He ran the UAT himself: 21 issues logged in the doc (8 high, 10 medium, 3 low), 16 marked done by 30 Oct, with comments from two designers <sup><a href="#e11">E11</a></sup>. Rounds two and three followed on 2 and 4 Nov, and the PM thanked him for the round-three fixes <sup><a href="#e29">E29</a></sup></li>
-        <li>Code review with his manager began on 6 Nov and is not finished. Two issues were raised: OneMap calls have no timeout, and the re-ranking needs a written rationale. Release has slipped from the week of 2 Nov to 11 or 12 Nov. Not shipped until #912 merges <sup><a href="#e30">E30</a></sup></li>
-      </ul>
-    </article>
-    <article class="card">
-      <div class="row"><h3>Compact sidebar</h3><span class="chip wip">In review</span></div>
-      <p>Marker cards collapse to a summary at rest, so more places fit before scrolling. MAPS-654.</p>
-      <ul>
-        <li><a href="https://github.com/opengovsg/maps/pull/936">#936</a> is open. He measured it on the 29 busiest public maps: median scroll to the end of the list falls from 21,300 to 8,900 px (−52%). His own estimate <sup><a href="#e26">E26</a></sup></li>
-        <li>A quick test with 3 OGP staff (not officers): all three preferred the compact rows, and current search blocked every one of them <sup><a href="#e26">E26</a></sup></li>
-        <li>While testing he spotted two scroll bugs and opened fixes <a href="https://github.com/opengovsg/maps/pull/966">#966</a> and <a href="https://github.com/opengovsg/maps/pull/967">#967</a> (MAPS-675, MAPS-678), both still open</li>
-      </ul>
-    </article>
-    <article class="card flag">
-      <div class="row"><h3>Enhanced CSV ingestion</h3><span class="chip wip">Not merged yet</span></div>
-      <p>His first owned workstream. Lets officers map any CSV, then edit rows on a live map with AI column mapping.</p>
-      <ul>
-        <li>Built the case from production PostHog data: 41% of create-flow uploads errored (407 of 989) <sup><a href="#e6">E6</a></sup></li>
-        <li>Ran moderated user tests with officers from SPF, NParks and NEA; 71 action items <sup><a href="#e7">E7</a></sup></li>
-        <li>Wrote the ADR for a shared LLM gateway with egress caps <sup><a href="#e8">E8</a></sup></li>
-        <li>Four PRs closed unmerged. v2 <a href="https://github.com/opengovsg/maps/pull/907">#907</a> is still open at about 50,600 lines changed <sup><a href="#e9">E9</a></sup></li>
-        <li>On 3 Nov he wrote the requirements-sync prep and a history of all three prototypes. By his figures, 46% of officers have their first upload rejected <sup><a href="#e27">E27</a></sup></li>
-        <li>Ownership now points back to him. He handed the flow to a teammate to explore on 23 Oct, but on 5 Nov the Linear parent issue MAPS-471 listed him as assignee, and the project sync targets end of November. Nothing confirms it in writing <sup><a href="#e23">E23</a></sup></li>
-      </ul>
-    </article>
-  </div>
-  <div class="panel scroll">
-    <table id="themes">
-      <thead><tr><th>Project</th><th class="n">Merged</th><th class="n">Open</th><th class="n">Closed</th><th class="n">Lines merged</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</section>
-
-<section aria-labelledby="h-usage">
-  <div class="sechead">
-    <span class="eyebrow">Post-launch usage · PostHog, Maps (production)</span>
-    <h2 id="h-usage">What the analytics show after launch</h2>
-    <p class="lede">Counts from the production project, excluding the team's own accounts. The dashed line marks launch. The last bar is partial.</p>
-  </div>
-  <div class="card flag"><div class="row"><h3>Corrected on 31 Oct</h3><span class="chip wip">Earlier figures withdrawn</span></div>
-    <p>The usage charts shown here until 23 Oct (ownership transfer: 24 events from 6 users in launch week; search: an 18-fold jump) came from PostHog project 189206, "Maps (local)". That project holds only preview, UAT and local test traffic. The charts below come from the production project, 189562, and tell a different story <sup><a href="#e16">E16</a></sup>.</p>
-  </div>
-  <div class="cards" id="usage"></div>
-</section>
-
-<section aria-labelledby="h-case">
-  <div class="sechead">
-    <span class="eyebrow">The case</span>
-    <h2 id="h-case">Why a return offer is justified</h2>
-  </div>
-  <div class="case">
-    <ol>
-      <li><b>He ships more than most of the team, adjusted for tenure.</b> 31 merged PRs since his first on 19 Aug is 2.78 a week, against a team median of 0.60 (n = 7) <sup><a href="#e1">E1</a></sup>. He slipped below the team's 75th percentile this week (2.99). Linear agrees from a separate source: 33 issues done, 2.90 a week against a team median of 2.16, with about the same median cycle time of 7 days <sup><a href="#e17">E17</a></sup>. Ten of the merges came from one tech-debt week and nine are under 20 lines, so the count flatters him. His 13,920 lines merged are above the team median of 8,659. His PRs take longer to merge than the team median (29.7 hours against 26.1).</li>
-      <li><b>He carries features from spec to guide.</b> Stacked markers, ownership transfer and the editable map link each went out with a UAT doc he wrote, follow-up fixes, and an officer-guide PR <sup><a href="#e2">E2</a></sup> <sup><a href="#e3">E3</a></sup> <sup><a href="#e11">E11</a></sup>. Across five UAT and bug-bash docs, including the search UAT, he logged 79 severity-tagged issues before release.</li>
-      <li><b>He starts from evidence, and goes to users.</b> Before building ingestion he measured the problem in production analytics, fixed his own first analysis when it hit the wrong project, ran moderated tests with officers from three agencies, and wrote an ADR with concrete safety limits <sup><a href="#e6">E6</a></sup> <sup><a href="#e7">E7</a></sup> <sup><a href="#e8">E8</a></sup>. For the sidebar rework he measured scroll length on the 29 busiest public maps and tested it with three colleagues before asking for UAT <sup><a href="#e26">E26</a></sup>.</li>
-      <li><b>He measures what he ships.</b> The Google Maps fix came with a 638-marker benchmark <sup><a href="#e5">E5</a></sup>. He added search-outcome tracking (<a href="https://github.com/opengovsg/maps/pull/911">#911</a>) and set up a Datadog monitor for blocked email recipients, then shipped the user-facing message for the same failure (<a href="https://github.com/opengovsg/maps/pull/935">#935</a>) <sup><a href="#e15">E15</a></sup>. He patched critical Next.js and DOMPurify advisories that were blocking PRs (<a href="https://github.com/opengovsg/maps/pull/943">#943</a>). He also spotted the Locate Me failure on the most-viewed public map, which the team escalated to a SEV-4 <sup><a href="#e18">E18</a></sup>. On 27 Oct he raised a SEV-3 on broken homepage map previews, found the cause and cut the fixing release within about an hour <sup><a href="#e20">E20</a></sup>. His stacked-marker tracking (<a href="https://github.com/opengovsg/maps/pull/922">#922</a>) merged on 26 Oct. In its first eleven days, production recorded 1,247 group-panel opens by 486 people outside the team <sup><a href="#e16">E16</a></sup>.</li>
-      <li><b>The team trusts him.</b> His manager thanked him in #maps for holding the fort while out of office <sup><a href="#e12">E12</a></sup>. A designer thanked him for picking up an issue unprompted <sup><a href="#e13">E13</a></sup>. A teammate's end-of-week thanks in #maps on 23 Oct named him and one other colleague <sup><a href="#e19">E19</a></sup>. After the 27 Oct incident, his manager credited him by name in an engineering-wide #eng write-up <sup><a href="#e21">E21</a></sup>. On 6 Nov his manager gave him and the designer a shout-out in #applied-experiments for improving user experience, and the designer thanked him for paving the way for data ingestion <sup><a href="#e29">E29</a></sup>. This week he approved two of his manager's PRs, both reviewed at the manager's request <sup><a href="#e1">E1</a></sup>. He set up a Linear loop that posts each release's notes to #maps, and shared two agent skills he built in a division-wide #aed-eng thread <sup><a href="#e28">E28</a></sup>. His ingestion demo drew a 63-reply thread <sup><a href="#e14">E14</a></sup>, and 410 of his roughly 560 public Slack messages are in #maps.</li>
-    </ol>
-    <aside class="gaps" aria-labelledby="h-gaps">
-      <h3 id="h-gaps">Weak spots a reviewer will see</h3>
-      <ul>
-        <li>The flagship ingestion work has not merged two months after he announced it, and the open v2 PR is too large to review in one pass.</li>
-        <li>His merged-PR rate fell below the team's 75th percentile this week (2.78 against 2.99, n = 7), with 2 merges in W45. Part of the rise in p75 comes from a contributor whose first PR was 3 Nov: 1 merge in 2 days counts as 3.5 a week.</li>
-        <li>18 Linear issues are in a started state at once, and MAPS-606 was reopened after being counted done.</li>
-        <li>He has reviewed 5 teammates' PRs, two of them this week. That is above the team median of 0, but still small.</li>
-        <li>One merged PR was reverted the same day.</li>
-        <li>Ownership transfer has 2 production events since its 8 Oct launch. The sidebar-pick event from #911 never appears in production. The usage figures shown until 23 Oct were test traffic and have been withdrawn.</li>
-        <li>Stacked-marker adoption rests on eleven days of data, with no before-number. Its tracking code threw an error on an older browser.</li>
-        <li>Smarter search slipped from the week of 2 Nov to 11 or 12 Nov, and its code review is unfinished.</li>
-        <li>Who owns ingestion is not confirmed in writing, though Linear lists him again as of 5 Nov.</li>
-        <li>A Notion summary says #825 shipped behind a flag. GitHub shows it closed without merging.</li>
-      </ul>
-    </aside>
-  </div>
-</section>
-
-<section aria-labelledby="h-next">
-  <div class="sechead">
-    <span class="eyebrow">Before review</span>
-    <h2 id="h-next">Five things that would strengthen the file</h2>
-  </div>
-  <ol class="next">
-    <li><b>Land ingestion in slices, and settle who owns it.</b> Split #907 into reviewable PRs behind the existing custom-csv-import flag, and confirm in writing that he owns the flow (Linear lists him on MAPS-471 as of 5 Nov) against the end-of-November target. A merged flagship outweighs everything else on this page.</li>
-    <li><b>Get the after-number for ingestion.</b> His UT plan set a baseline of 25m 11s at the upload step and a 41% error rate. Re-measure both once it ships.</li>
-    <li><b>Find out why two of his events barely register in production.</b> Check whether <span class="mono">map_ownership_transferred</span> fired in production before 29 Oct, and why <span class="mono">search_suggestion_selected</span> from #911 is missing there. Either a quiet feature or broken tracking is worth knowing before review. While there, replace <span class="mono">toSorted</span> in the #922 tracking so older browsers stop throwing.</li>
-    <li><b>Keep the review habit going.</b> He approved #957 and #964 this week, taking him from 3 reviews to 5. One or two a week until review would turn the thinnest signal here into a steady one.</li>
-    <li><b>Close or hand back in-flight issues</b> to bring the 18 started Linear issues down, and ask the manager and designer for written feedback to attach.</li>
-  </ol>
-</section>
-
-<section aria-labelledby="h-ledger">
-  <div class="sechead">
-    <span class="eyebrow">Evidence ledger</span>
-    <h2 id="h-ledger">Sources behind each claim</h2>
-  </div>
-  <div class="panel scroll">
-    <table class="ledger">
-      <thead><tr><th>Ref</th><th>Evidence</th><th>What it shows</th></tr></thead>
-      <tbody>
-        <tr id="e1"><td>E1</td><td>GitHub GraphQL, all 916 PRs in opengovsg/maps<span class="k">collect_github.py, analyze.py</span></td><td>31 merged, 5 open, 10 closed. 5 reviews of teammates' PRs, including <a href="https://github.com/opengovsg/maps/pull/957">#957</a> (2 Nov) and <a href="https://github.com/opengovsg/maps/pull/964">#964</a> (5 Nov). Team baseline from 7 human PR authors since 17 Aug; bots and agent accounts excluded. One author's first PR was 3 Nov, so their single merge counts as 3.5 a week.</td></tr>
-        <tr id="e2"><td>E2</td><td><a href="https://github.com/opengovsg/maps/pull/868">PR #868</a>, <a href="https://github.com/opengovsg/maps/pull/855">#855</a>, <a href="https://github.com/opengovsg/maps/pull/875">#875</a></td><td>The three largest shipped features.</td></tr>
-        <tr id="e3"><td>E3</td><td><a href="https://github.com/opengovsg/maps/pull/887">PR #887</a>, <a href="https://github.com/opengovsg/maps/pull/892">#892</a></td><td>Officer-guide updates shipped with his features.</td></tr>
-        <tr id="e5"><td>E5</td><td><a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1791775935071139">Slack #maps, 12 Oct</a></td><td>Google Maps links land on the right place 86% of the time, up from 10%, on 638 markers across 11 maps. Self-reported.</td></tr>
-        <tr id="e6"><td>E6</td><td><a href="https://app.notion.com/p/3ca77dbba7888103ae9bcdb3cc77ed31">Notion: CSV Upload Friction, Production Metrics</a></td><td>41% create-flow error rate (407 of 989), 48% of people hit an error, 25m 11s average at the upload step.</td></tr>
-        <tr id="e7"><td>E7</td><td><a href="https://app.notion.com/p/3d577dbba78880d0841cf5687dc6c568">Notion: Data ingestion UT</a>, <a href="https://app.notion.com/p/3d477dbba78880e2813fdcd930fabe64">UT proposal</a></td><td>At least 4 moderated sessions with officers from SPF, NParks and NEA; 71 action items triaged P1/P2.</td></tr>
-        <tr id="e8"><td>E8</td><td><a href="https://app.notion.com/p/3d677dbba78881498ff4ca95cc278fcd">Notion: ADR, Shared LLM Gateway</a></td><td>20 s timeout, 6 calls a minute, 5-row egress cap, consent screen, heuristic fallback. Status: proposed.</td></tr>
-        <tr id="e9"><td>E9</td><td><a href="https://github.com/opengovsg/maps/pull/907">PR #907</a></td><td>v2 CSV ingestion, open, 49,602 additions and 986 deletions.</td></tr>
-        <tr id="e11"><td>E11</td><td>Notion: <a href="https://app.notion.com/p/3ec77dbba78880269cfdfbf195d77375">UAT Transfer Ownership</a>, <a href="https://app.notion.com/p/3ec77dbba78880398060e8cfba63de81">UAT Mobile Touch Markers</a>, <a href="https://app.notion.com/p/3eb77dbba78880c3b34cc288ff8c702b">UAT Stacked Markers</a>, <a href="https://app.notion.com/p/3e577dbba7888048a200e92e85b2a8da">Bug bash, Stacked Markers Preview</a>, <a href="https://app.notion.com/p/40577dbba7888160a848fff16f6bbc6d">UAT Smarter Search</a></td><td>10 + 10 + 16 + 22 + 21 = 79 severity-tagged issues logged. The search UAT (8 high, 10 medium, 3 low; 16 done by 30 Oct) is for a feature that has not shipped yet.</td></tr>
-        <tr id="e12"><td>E12</td><td><a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1790906960014109">Slack #maps, 2 Oct</a></td><td>Manager thanks him for holding the fort while out of office.</td></tr>
-        <tr id="e13"><td>E13</td><td><a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1792031061472299">Slack #maps, 15 Oct</a></td><td>Designer thanks him for taking the initiative on an issue.</td></tr>
-        <tr id="e14"><td>E14</td><td><a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1788857699246779">Slack #maps, 8 Sep</a></td><td>Ingestion demo video after a bug bash; 63 replies.</td></tr>
-        <tr id="e15"><td>E15</td><td>Datadog monitor 335569817</td><td>"Maps: Postman blacklisted recipient", created by him on 22 Oct for MAPS-555. Status OK as of 23 Oct; not re-checked on 30 Oct or 6 Nov because Datadog was unreachable. MAPS-555 moved to Done on 23 Oct when <a href="https://github.com/opengovsg/maps/pull/935">#935</a> merged.</td></tr>
-        <tr id="e16"><td>E16</td><td>PostHog project 189562, "Maps (production)", read-only HogQL pulled 31 Oct and 6 Nov<span class="k">the project's own test-account filter excludes the team</span></td><td>stacked_marker_group_opened: 1,247 opens by 486 people on 20 page URLs, 27 Oct to 6 Nov; 648 in the week of 25 Oct, 599 in the partial week of 1 Nov. map_ownership_transferred: 2 events ever, on 29 Oct (1 external, 1 internal). search_performed: 7,091 to 13,818 a week from external users since 11 Oct, with no step at #911; search_suggestion_selected is still absent. Everything shown before 30 Oct came from project 189206, "Maps (local)", which holds only test traffic, and has been withdrawn.</td></tr>
-        <tr id="e17"><td>E17</td><td>Linear, MAPS team</td><td>62 issues assigned, 33 done, median cycle 6.87 days against a team median of 6.98. 18 are in a started state. MAPS-606 was counted done on 28 Oct and reopened on 3 Nov. Baseline: 5 assignees with completed issues since 17 Aug.</td></tr>
-        <tr id="e18"><td>E18</td><td>Slack #maps, 17 Oct; incident channel #inc-1458-10_19_2026-locate_me_fails_on_embedded_maps; Notion journal <a href="https://app.notion.com/p/3fe77dbba78880df8da7edde1c62fdfd">Monday 19 Oct</a>; Datadog IR-1458</td><td>He reported the broken Locate Me on the climate-vouchers embed. A teammate asked for a SEV-4 on 19 Oct and the incident channel was opened that day. As of 23 Oct, Datadog listed another engineer as owner and the incident was still open (stable). Not re-checked on 30 Oct or 6 Nov.</td></tr>
-        <tr id="e20"><td>E20</td><td><a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793071177489279">Slack #maps, 27 Oct</a> (15-reply thread), <a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793074810048259">manager's thanks</a>; incident channel #inc-1479; Notion journal <a href="https://app.notion.com/p/40677dbba78880f7a74dfb09d0281f83">Tuesday 27 Oct</a></td><td>He reported the broken previews, asked whether to declare an incident, and posted the Cloudflare WAF root cause. SEV-3, about 11:19 to 12:19 SGT. His manager thanked him "for raising and resolving your first incident".</td></tr>
-        <tr id="e21"><td>E21</td><td><a href="https://opengovproducts.enterprise.slack.com/archives/CK9GGK6EP/p1793076241063399">Slack #eng, 27 Oct</a></td><td>The manager's engineering-wide learning write-up credits him by name for spotting and debugging it, and gives the impact as about 63 users with no functional impact.</td></tr>
-        <tr id="e22"><td>E22</td><td><a href="https://github.com/opengovsg/maps/pull/939">PR #939</a>; Slack #maps-linear, 23 Oct (a Linear bot mirror of his comment)</td><td>Root cause: two racing setData writes to Mapbox about 9 ms apart. His repro went from 8 of 8 runs with stale stacks to 0 of 8. Self-reported. Merged 30 Oct.</td></tr>
-        <tr id="e23"><td>E23</td><td>Notion journals <a href="https://app.notion.com/p/3fe77dbba78880df8da7edde1c62fdfd">Friday 23 Oct</a>, <a href="https://app.notion.com/p/40877dbba788804490f2d0b06dc17113">Thursday 29 Oct</a> and <a href="https://app.notion.com/p/40e77dbba7888063b649cdff9cb9a028">Thursday 5 Nov</a>; Slack #maps-linear, 5 Nov</td><td>On 23 Oct he handed the ingestion flow to a teammate to explore. On 29 Oct, prototyping the ingestion redesign was still on his to-do list. On 5 Nov MAPS-471 was updated with him as assignee, and the project sync targeted end of November.</td></tr>
-        <tr id="e24"><td>E24</td><td><a href="https://github.com/opengovsg/maps/pull/958">PR #958</a>; <a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793696993649649">Slack #maps, 3 Nov</a></td><td>Marker list fixed for long names, badges, distances and counts (MAPS-673), found with his /break-ui stress test. The designer gave her OK on 2 Nov and the manager approved on 3 Nov. Merged 3 Nov.</td></tr>
-        <tr id="e25"><td>E25</td><td>Slack #evitan, 3 Nov (PostHog error-tracking bot); <a href="https://github.com/opengovsg/maps/pull/922">PR #922</a> diff</td><td>TypeError on Chrome 109 when clicking a stacked-marker bubble: the tracking calls Array.prototype.toSorted. The call was added in #922. 1 event from 1 user at the time of the post.</td></tr>
-        <tr id="e26"><td>E26</td><td><a href="https://app.notion.com/p/40c77dbba7888047a2a5dfd6fe925f17">Notion: Sidebar Enhancements</a>, <a href="https://app.notion.com/p/40e77dbba78880aa92c2ecb71a54cdef">Guerrilla UT, Sidebar</a>; <a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793693955746989">Slack #maps, 3 Nov</a></td><td>On the 29 busiest public maps, median scroll to the end of the list: 21,300 to 8,900 px with #936 (−52%), labelled as estimates. A test with 3 OGP staff (names omitted): all preferred the compact design, and search blocked all of them.</td></tr>
-        <tr id="e27"><td>E27</td><td><a href="https://app.notion.com/p/40c77dbba78881df88a8ed44f2d47518">Notion: Enhanced ingestion, requirements sync prep</a>, <a href="https://app.notion.com/p/40d77dbba7888167a888e0291fc51c90">prototype history</a></td><td>His synthesis of testing so far: 46% of officers' first uploads are rejected, and 22 of 226 maps lost rows silently. Figures as he wrote them, not re-checked. The history covers prototypes #825, #847 (closed) and #907 (open).</td></tr>
-        <tr id="e28"><td>E28</td><td><a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793691025932579">Slack #maps, 3 Nov</a>; <a href="https://opengovproducts.enterprise.slack.com/archives/C08MCA5PXLN/p1793781180647509?thread_ts=1793772578.573409">Slack #aed-eng, 4 Nov</a></td><td>Set up a Linear loop that posts release notes to #maps; its first post lists his MAPS-659 fix. Shared his competitor-design and verify-maps skills in a division-wide AI-workflow thread (5 tacos).</td></tr>
-        <tr id="e29"><td>E29</td><td><a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793843953605569?thread_ts=1793171214.513399">Slack #maps, 5 Nov</a>, <a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1793937207730789?thread_ts=1793931122.752649">6 Nov</a>; <a href="https://opengovproducts.enterprise.slack.com/archives/C09FLDCA8UR/p1793942972013549">#applied-experiments, 6 Nov</a></td><td>The PM thanked him for the search UAT round-three fixes. The designer thanked him for paving the way for data ingestion and for joint design jams. The manager credited him and the designer for improving user experience. A second shout-out that day was shared three ways and is not counted.</td></tr>
-        <tr id="e30"><td>E30</td><td><a href="https://app.notion.com/p/41077dbba78880a6b94cf67c83838be8">Notion: Search Code Review, 6 Nov</a>; Notion journal <a href="https://app.notion.com/p/40e77dbba7888063b649cdff9cb9a028">Thursday 5 Nov</a></td><td>Code review of #912 with his manager, not finished. Issues raised: no timeout on OneMap calls; re-ranking needs a written rationale. Release target moved from 10 Nov to 11 or 12 Nov.</td></tr>
-        <tr id="e19"><td>E19</td><td><a href="https://opengovproducts.enterprise.slack.com/archives/C087HRWP18B/p1792739095537729">Slack #maps, 23 Oct</a></td><td>End-of-week thanks to him and one other colleague for the week's work.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section aria-labelledby="h-src">
-  <div class="sechead">
-    <span class="eyebrow">Coverage</span>
-    <h2 id="h-src">Which sources answered</h2>
-  </div>
-  <div class="src-grid">
-    <div class="srcb"><b>GitHub</b><span class="st ok">Complete</span>All PRs and reviews in opengovsg/maps. No org-wide OGP baseline: the search API cannot group by author at that scale.</div>
-    <div class="srcb"><b>Linear</b><span class="st ok">Complete</span>Assigned and created issues, team completions since 17 Aug.</div>
-    <div class="srcb"><b>Notion</b><span class="st ok">Mostly</span>107 authored pages, about 60 of them daily journals. Creation dates were not readable; no team doc baseline.</div>
-    <div class="srcb"><b>Slack</b><span class="st part">Public only</span>Public messages tallied by hand from search (about ±5). DMs not counted or quoted.</div>
-    <div class="srcb"><b>PostHog</b><span class="st ok">Production, from 31 Oct</span>Maps (production), project 189562, excluding team accounts. Earlier pulls used the dev project, 189206, and were withdrawn. Stacked-marker data covers eleven days.</div>
-    <div class="srcb"><b>Datadog</b><span class="st part">Not reached 30 Oct or 6 Nov</span>The Datadog connector on the OGP Gateway needs its own sign-in, which was not completed this week, so these are the 23 Oct findings: two SEV-4s, 1458 (Locate Me, which he spotted but did not own or fix) and 1459, not linked to his code. The 27 Oct SEV-3 (1479) is not cross-checked.</div>
-  </div>
-</section>
-
-<footer>Generated <span id="asof2"></span> from collect_github.py, analyze.py and build.py plus read-only pulls of Linear, Notion, Slack and PostHog (Datadog carried over from 23 Oct). Team comparisons are aggregate only. Rerun the scripts to refresh.</footer>
-</div>
-<div id="tip" hidden></div>
-
-<script>
-const V = {"as_of": "2026-11-06", "start": "2026-08-17", "tenure_weeks": 11.57, "prs": [{"number": 808, "title": "feat(web): style markers panel help control (MAPS-452)", "url": "https://github.com/opengovsg/maps/pull/808", "state": "closed", "created": "2026-08-19", "merged": null, "additions": 739, "deletions": 196, "theme": "Onboarding", "ttm_hours": null}, {"number": 812, "title": "feat(web): style markers panel help control (MAPS-452)", "url": "https://github.com/opengovsg/maps/pull/812", "state": "merged", "created": "2026-08-20", "merged": "2026-08-26", "additions": 257, "deletions": 8, "theme": "Onboarding", "ttm_hours": 140.1}, {"number": 821, "title": "fix(web): don't mark session cookie Secure outside prod/staging", "url": "https://github.com/opengovsg/maps/pull/821", "state": "closed", "created": "2026-08-28", "merged": null, "additions": 16, "deletions": 1, "theme": "Other", "ttm_hours": null}, {"number": 822, "title": "docs(web): note Safari localhost cookie known issue", "url": "https://github.com/opengovsg/maps/pull/822", "state": "closed", "created": "2026-08-28", "merged": null, "additions": 7, "deletions": 0, "theme": "Onboarding", "ttm_hours": null}, {"number": 824, "title": "docs: note Safari localhost cookie known issue in README", "url": "https://github.com/opengovsg/maps/pull/824", "state": "merged", "created": "2026-08-28", "merged": "2026-08-28", "additions": 2, "deletions": 0, "theme": "Onboarding", "ttm_hours": 2.4}, {"number": 825, "title": "feat(admin-map): map any CSV, fix postal codes (MAPS-471, MAPS-470)", "url": "https://github.com/opengovsg/maps/pull/825", "state": "closed", "created": "2026-08-28", "merged": null, "additions": 10788, "deletions": 55, "theme": "CSV ingestion", "ttm_hours": null}, {"number": 826, "title": "feat(web): suggest and fix truncated 5-digit postal codes (MAPS-470)", "url": "https://github.com/opengovsg/maps/pull/826", "state": "closed", "created": "2026-08-28", "merged": null, "additions": 810, "deletions": 23, "theme": "CSV ingestion", "ttm_hours": null}, {"number": 847, "title": "feat(admin-map): custom CSV import with column-mapper UI (MAPS-472)", "url": "https://github.com/opengovsg/maps/pull/847", "state": "closed", "created": "2026-09-08", "merged": null, "additions": 13516, "deletions": 56, "theme": "CSV ingestion", "ttm_hours": null}, {"number": 851, "title": "feat(admin-map): accept .xlsx/.docx/.pdf tables in custom CSV import (MAPS-497)", "url": "https://github.com/opengovsg/maps/pull/851", "state": "closed", "created": "2026-09-10", "merged": null, "additions": 51645, "deletions": 34939, "theme": "CSV ingestion", "ttm_hours": null}, {"number": 855, "title": "feat(web): transfer map ownership to an existing editor (MAPS-510)", "url": "https://github.com/opengovsg/maps/pull/855", "state": "merged", "created": "2026-09-14", "merged": "2026-10-08", "additions": 989, "deletions": 35, "theme": "Map ownership transfer", "ttm_hours": 573.9}, {"number": 861, "title": "fix(web): mobile map marker touch targets and tap-to-zoom (MAPS-513)", "url": "https://github.com/opengovsg/maps/pull/861", "state": "merged", "created": "2026-09-15", "merged": "2026-10-13", "additions": 1662, "deletions": 199, "theme": "Stacked markers & map UX", "ttm_hours": 670.5}, {"number": 862, "title": "fix(web): upgrade @opengovsg/confetti to 0.9.x (MAPS-440)", "url": "https://github.com/opengovsg/maps/pull/862", "state": "merged", "created": "2026-09-16", "merged": "2026-09-21", "additions": 201, "deletions": 15, "theme": "Tech debt & polish", "ttm_hours": 120.1}, {"number": 865, "title": "feat(web): editable share link with inline slug editor (MAPS-520)", "url": "https://github.com/opengovsg/maps/pull/865", "state": "closed", "created": "2026-09-18", "merged": null, "additions": 1015, "deletions": 199, "theme": "Editable map link", "ttm_hours": null}, {"number": 866, "title": "feat(web): editable share link with inline slug editor (MAPS-520)", "url": "https://github.com/opengovsg/maps/pull/866", "state": "closed", "created": "2026-09-18", "merged": null, "additions": 1463, "deletions": 387, "theme": "Editable map link", "ttm_hours": null}, {"number": 868, "title": "feat(map): stacked markers engine and group sidebar (MAPS-524)", "url": "https://github.com/opengovsg/maps/pull/868", "state": "merged", "created": "2026-09-21", "merged": "2026-10-08", "additions": 3085, "deletions": 652, "theme": "Stacked markers & map UX", "ttm_hours": 403.2}, {"number": 875, "title": "feat(web): edit the map link inline on the publish page (MAPS-520)", "url": "https://github.com/opengovsg/maps/pull/875", "state": "merged", "created": "2026-09-24", "merged": "2026-10-01", "additions": 902, "deletions": 416, "theme": "Editable map link", "ttm_hours": 165.2}, {"number": 877, "title": "fix(web): open google maps on the marker's name and address (MAPS-519)", "url": "https://github.com/opengovsg/maps/pull/877", "state": "merged", "created": "2026-09-27", "merged": "2026-10-13", "additions": 79, "deletions": 18, "theme": "Google Maps links", "ttm_hours": 376.6}, {"number": 887, "title": "docs(guide): change the map link from the Publish page (MAPS-520)", "url": "https://github.com/opengovsg/maps/pull/887", "state": "merged", "created": "2026-10-01", "merged": "2026-10-08", "additions": 36, "deletions": 16, "theme": "Editable map link", "ttm_hours": 168.5}, {"number": 892, "title": "docs(guide): document transferring map ownership (MAPS-592)", "url": "https://github.com/opengovsg/maps/pull/892", "state": "merged", "created": "2026-10-07", "merged": "2026-10-08", "additions": 34, "deletions": 3, "theme": "Map ownership transfer", "ttm_hours": 21.8}, {"number": 896, "title": "fix(web): name previous owner in transfer email (MAPS-510)", "url": "https://github.com/opengovsg/maps/pull/896", "state": "merged", "created": "2026-10-08", "merged": "2026-10-08", "additions": 18, "deletions": 6, "theme": "Map ownership transfer", "ttm_hours": 0.4}, {"number": 905, "title": "fix(web): keep stack rings steady while zooming (MAPS-599)", "url": "https://github.com/opengovsg/maps/pull/905", "state": "merged", "created": "2026-10-13", "merged": "2026-10-20", "additions": 1379, "deletions": 926, "theme": "Stacked markers & map UX", "ttm_hours": 173.3}, {"number": 907, "title": "feat(admin-map): v2 csv ingestion with live map and row checks (MAPS-497)", "url": "https://github.com/opengovsg/maps/pull/907", "state": "open", "created": "2026-10-13", "merged": null, "additions": 49602, "deletions": 986, "theme": "CSV ingestion", "ttm_hours": null}, {"number": 911, "title": "feat(web): record search outcomes and sidebar picks (MAPS-609)", "url": "https://github.com/opengovsg/maps/pull/911", "state": "merged", "created": "2026-10-14", "merged": "2026-10-14", "additions": 152, "deletions": 14, "theme": "Search", "ttm_hours": 1.1}, {"number": 912, "title": "feat(web): search dropdown with places, areas and markers (MAPS-609)", "url": "https://github.com/opengovsg/maps/pull/912", "state": "open", "created": "2026-10-14", "merged": null, "additions": 10138, "deletions": 1973, "theme": "Search", "ttm_hours": null}, {"number": 913, "title": "chore(design-system): remove the unused Radix toast stack (MAPS-615)", "url": "https://github.com/opengovsg/maps/pull/913", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 3, "deletions": 483, "theme": "Tech debt & polish", "ttm_hours": 22.7}, {"number": 914, "title": "fix(web): steady marker card selection (MAPS-559, MAPS-560)", "url": "https://github.com/opengovsg/maps/pull/914", "state": "merged", "created": "2026-10-14", "merged": "2026-10-20", "additions": 49, "deletions": 5, "theme": "Stacked markers & map UX", "ttm_hours": 146.8}, {"number": 915, "title": "chore(web): remove commented-out landing search code (MAPS-614)", "url": "https://github.com/opengovsg/maps/pull/915", "state": "closed", "created": "2026-10-14", "merged": null, "additions": 0, "deletions": 23, "theme": "Tech debt & polish", "ttm_hours": null}, {"number": 916, "title": "fix(design-system): flip the masthead arrow when open (MAPS-611)", "url": "https://github.com/opengovsg/maps/pull/916", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 4, "deletions": 4, "theme": "Tech debt & polish", "ttm_hours": 23.2}, {"number": 917, "title": "fix(web): suppress the hydration warning on <html> (MAPS-612)", "url": "https://github.com/opengovsg/maps/pull/917", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 2, "deletions": 0, "theme": "Tech debt & polish", "ttm_hours": 22.8}, {"number": 918, "title": "fix(web): add one-time-code hints to sign-in code inputs (MAPS-604)", "url": "https://github.com/opengovsg/maps/pull/918", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 8, "deletions": 0, "theme": "Tech debt & polish", "ttm_hours": 22.9}, {"number": 919, "title": "fix(web): show resend links and spinner in brand green (MAPS-610)", "url": "https://github.com/opengovsg/maps/pull/919", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 6, "deletions": 6, "theme": "Tech debt & polish", "ttm_hours": 23.3}, {"number": 920, "title": "refactor(web): load fonts once and add colour tokens (MAPS-607)", "url": "https://github.com/opengovsg/maps/pull/920", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 97, "deletions": 37, "theme": "Tech debt & polish", "ttm_hours": 29.7}, {"number": 921, "title": "docs: make feature flags optional for new behavior", "url": "https://github.com/opengovsg/maps/pull/921", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 12, "deletions": 9, "theme": "Tech debt & polish", "ttm_hours": 22.3}, {"number": 922, "title": "feat(web): record stacked-marker panel opens (MAPS-637)", "url": "https://github.com/opengovsg/maps/pull/922", "state": "merged", "created": "2026-10-14", "merged": "2026-10-26", "additions": 266, "deletions": 20, "theme": "Stacked markers & map UX", "ttm_hours": 284.0}, {"number": 923, "title": "fix(web): redirect /faq to the officer guide FAQ (MAPS-613)", "url": "https://github.com/opengovsg/maps/pull/923", "state": "merged", "created": "2026-10-14", "merged": "2026-10-15", "additions": 4, "deletions": 4, "theme": "Tech debt & polish", "ttm_hours": 15.8}, {"number": 925, "title": "Revert \"fix(web): show resend links and spinner in brand green (MAPS-610)\"", "url": "https://github.com/opengovsg/maps/pull/925", "state": "merged", "created": "2026-10-15", "merged": "2026-10-15", "additions": 6, "deletions": 6, "theme": "Tech debt & polish", "ttm_hours": 7.6}, {"number": 935, "title": "fix(web): ask users to contact support when OTP send fails (MAPS-555)", "url": "https://github.com/opengovsg/maps/pull/935", "state": "merged", "created": "2026-10-20", "merged": "2026-10-23", "additions": 8, "deletions": 1, "theme": "Support & reliability", "ttm_hours": 65.4}, {"number": 936, "title": "fix(web): collapse marker cards at rest to a summary (MAPS-654)", "url": "https://github.com/opengovsg/maps/pull/936", "state": "open", "created": "2026-10-20", "merged": null, "additions": 1940, "deletions": 311, "theme": "Stacked markers & map UX", "ttm_hours": null}, {"number": 939, "title": "fix(web): stop stale stack bubbles after area filter (MAPS-659)", "url": "https://github.com/opengovsg/maps/pull/939", "state": "merged", "created": "2026-10-22", "merged": "2026-10-30", "additions": 37, "deletions": 22, "theme": "Stacked markers & map UX", "ttm_hours": 190.9}, {"number": 943, "title": "fix(deps): patch critical next and dompurify advisories", "url": "https://github.com/opengovsg/maps/pull/943", "state": "merged", "created": "2026-10-23", "merged": "2026-10-23", "additions": 68, "deletions": 66, "theme": "Support & reliability", "ttm_hours": 0.1}, {"number": 944, "title": "fix(web): super admin preview scroll, filters, debug aids (MAPS-661)", "url": "https://github.com/opengovsg/maps/pull/944", "state": "merged", "created": "2026-10-23", "merged": "2026-11-03", "additions": 860, "deletions": 137, "theme": "Tech debt & polish", "ttm_hours": 263.5}, {"number": 946, "title": "fix(web): show resend links and spinner in brand green (MAPS-610)", "url": "https://github.com/opengovsg/maps/pull/946", "state": "merged", "created": "2026-10-26", "merged": "2026-10-26", "additions": 6, "deletions": 6, "theme": "Tech debt & polish", "ttm_hours": 0.6}, {"number": 955, "title": "chore(skills): remove dated prompt patterns and stale facts", "url": "https://github.com/opengovsg/maps/pull/955", "state": "merged", "created": "2026-10-30", "merged": "2026-10-30", "additions": 29, "deletions": 28, "theme": "Dev tooling & agent skills", "ttm_hours": 2.6}, {"number": 958, "title": "fix(web): marker list holds up on real-world data (MAPS-673)", "url": "https://github.com/opengovsg/maps/pull/958", "state": "merged", "created": "2026-10-30", "merged": "2026-11-03", "additions": 483, "deletions": 34, "theme": "Stacked markers & map UX", "ttm_hours": 95.7}, {"number": 966, "title": "fix(web): scroll-to-top reaches the top in one click (MAPS-675)", "url": "https://github.com/opengovsg/maps/pull/966", "state": "open", "created": "2026-11-04", "merged": null, "additions": 3, "deletions": 1, "theme": "Tech debt & polish", "ttm_hours": null}, {"number": 967, "title": "fix(web): overlay sidebar scrollbar on the marker list (MAPS-678)", "url": "https://github.com/opengovsg/maps/pull/967", "state": "open", "created": "2026-11-04", "merged": null, "additions": 207, "deletions": 62, "theme": "Stacked markers & map UX", "ttm_hours": null}], "counts": {"merged": 31, "open": 5, "closed": 10}, "merged_lines": {"additions": 10744, "deletions": 3176}, "small_merged": 9, "merged_by_week": {"2026-W35": 2, "2026-W39": 1, "2026-W40": 1, "2026-W41": 5, "2026-W42": 12, "2026-W43": 4, "2026-W44": 4, "2026-W45": 2}, "themes": {"Onboarding": {"merged": 2, "open": 0, "closed": 2, "lines_merged": 267}, "Other": {"merged": 0, "open": 0, "closed": 1, "lines_merged": 0}, "CSV ingestion": {"merged": 0, "open": 1, "closed": 4, "lines_merged": 0}, "Map ownership transfer": {"merged": 3, "open": 0, "closed": 0, "lines_merged": 1085}, "Stacked markers & map UX": {"merged": 7, "open": 2, "closed": 0, "lines_merged": 8819}, "Tech debt & polish": {"merged": 12, "open": 1, "closed": 1, "lines_merged": 1916}, "Editable map link": {"merged": 2, "open": 0, "closed": 2, "lines_merged": 1370}, "Google Maps links": {"merged": 1, "open": 0, "closed": 0, "lines_merged": 97}, "Search": {"merged": 1, "open": 1, "closed": 0, "lines_merged": 166}, "Support & reliability": {"merged": 2, "open": 0, "closed": 0, "lines_merged": 143}, "Dev tooling & agent skills": {"merged": 1, "open": 0, "closed": 0, "lines_merged": 57}}, "reviews_given": 5, "gh_baseline": {"population": "Human authors who opened >=1 PR in opengovsg/maps since 2026-08-17; bots and agent accounts (bantu-bot, claude, cursor, dependabot, github-actions, renovate) excluded. Rates normalised per week since the later of 2026-08-17 and the author's first PR in the repo.", "n_authors": 7, "merged_per_week": {"n": 7, "p25": 0.3, "median": 0.6, "p75": 2.99, "me": 2.78, "share_at_or_below_me": 71}, "median_ttm_hours": {"n": 5, "p25": 24.9, "median": 26.12, "p75": 29.67, "me": 29.67, "share_at_or_below_me": 80}, "reviews_per_week": {"n": 7, "p25": 0.0, "median": 0.0, "p75": 0.57, "me": 0.54, "share_at_or_below_me": 71}, "lines_merged": {"n": 7, "p25": 45.0, "median": 8659.0, "p75": 16882.5, "me": 13920, "share_at_or_below_me": 71}}, "linear": {"assigned": 62, "completed": 33, "per_week": 2.895, "cycle_days": 6.866, "lead_days": 11.744, "in_flight": 18, "created": 73, "baseline": {"n_assignees": 5, "completed_per_week": {"p25": 1.988, "median": 2.16, "p75": 2.895}, "median_cycle_days": 6.983}}, "posthog": [{"feature": "Stacked markers engine (MAPS-524) -- group panel opens via tracking from MAPS-637", "event": "stacked_marker_group_opened", "launch_date": "2026-10-27", "weekly": [{"week_starting": "2026-09-06", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-13", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-20", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-27", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-04", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-11", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-18", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-25", "count": 648, "unique_users": 203}, {"week_starting": "2026-11-01", "count": 599, "unique_users": 286, "partial_week": true}], "daily": [{"day": "2026-10-27", "count": 204, "unique_users": 32}, {"day": "2026-10-28", "count": 102, "unique_users": 51}, {"day": "2026-10-29", "count": 197, "unique_users": 43}, {"day": "2026-10-30", "count": 63, "unique_users": 39}, {"day": "2026-10-31", "count": 82, "unique_users": 44}, {"day": "2026-11-01", "count": 104, "unique_users": 58}, {"day": "2026-11-02", "count": 88, "unique_users": 38}, {"day": "2026-11-03", "count": 109, "unique_users": 51}, {"day": "2026-11-04", "count": 109, "unique_users": 61}, {"day": "2026-11-05", "count": 101, "unique_users": 47}, {"day": "2026-11-06", "count": 88, "unique_users": 34, "partial_day": true}], "pr_url": "https://github.com/opengovsg/maps/pull/922"}, {"feature": "Transfer ownership of a private map (MAPS-510)", "event": "map_ownership_transferred", "launch_date": "2026-10-08", "weekly": [{"week_starting": "2026-09-06", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-13", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-20", "count": 0, "unique_users": 0}, {"week_starting": "2026-09-27", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-04", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-11", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-18", "count": 0, "unique_users": 0}, {"week_starting": "2026-10-25", "count": 1, "unique_users": 1}, {"week_starting": "2026-11-01", "count": 0, "unique_users": 0, "partial_week": true}], "daily": null, "pr_url": "https://github.com/opengovsg/maps/pull/855"}, {"feature": "Search outcomes tracking (MAPS-609, PR #911) -- context only", "event": "search_performed", "launch_date": "2026-10-14", "weekly": [{"week_starting": "2026-09-06", "count": 14373, "unique_users": 3315}, {"week_starting": "2026-09-13", "count": 8454, "unique_users": 1775}, {"week_starting": "2026-09-20", "count": 7670, "unique_users": 1634}, {"week_starting": "2026-09-27", "count": 9048, "unique_users": 1858}, {"week_starting": "2026-10-04", "count": 11622, "unique_users": 2527}, {"week_starting": "2026-10-11", "count": 13818, "unique_users": 3187}, {"week_starting": "2026-10-18", "count": 9460, "unique_users": 1986}, {"week_starting": "2026-10-25", "count": 8760, "unique_users": 1912}, {"week_starting": "2026-11-01", "count": 7091, "unique_users": 1449, "partial_week": true}], "daily": null, "pr_url": "https://github.com/opengovsg/maps/pull/911"}], "slack_by_week": {"2026-W34": 38, "2026-W35": 25, "2026-W36": 24, "2026-W37": 56, "2026-W38": 58, "2026-W39": 82, "2026-W40": 52, "2026-W41": 33, "2026-W42": 28, "2026-W43": 47, "2026-W44": 65, "2026-W45": 52}, "slack_public_total": 560, "slack_maps": 410, "notion_authored": 107, "now": {"merged": 31, "lines": 13920, "merged_per_week": 2.78, "linear_done": 33, "linear_per_week": 2.895, "reviews": 5, "in_flight": 18}, "prev": {"merged": 29, "lines": 12406, "merged_per_week": 2.86, "linear_done": 32, "linear_per_week": 3.078, "reviews": 3, "in_flight": 17}, "prev_as_of": "2026-10-30"};
-const NS = "http://www.w3.org/2000/svg";
-const $ = s => document.querySelector(s);
-const el = (tag, attrs = {}, parent) => {
-  const e = document.createElementNS(NS, tag);
-  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
-  if (parent) parent.appendChild(e);
-  return e;
-};
-const fmt = n => n.toLocaleString("en-SG");
-const day = s => new Date(s + "T00:00:00Z");
-const DAY = 864e5;
-
-$("#asof").textContent = $("#asof2").textContent = new Date(V.as_of + "T00:00:00Z").toLocaleDateString("en-SG", {day: "numeric", month: "short", year: "numeric", timeZone: "UTC"});
-
-const NWEEKS = Math.ceil((day(V.as_of) - day(V.start)) / (7 * DAY));
-const weekKeys = Array.from({length: NWEEKS}, (_, i) => `2026-W${34 + i}`);
-$("#weeks").style.setProperty("--n", NWEEKS);
-$("#weeks-cap").textContent = `Merged PRs per ISO week, W34 to W${33 + NWEEKS}`;
-const maxW = Math.max(...Object.values(V.merged_by_week));
-$("#weeks").innerHTML = weekKeys.map(k => {
-  const n = V.merged_by_week[k] || 0;
-  return `<div data-tip="${k}: ${n} merged PR${n === 1 ? "" : "s"}"><span style="--o:${n ? .25 + .75 * n / maxW : .08}"></span>${k.slice(6)}</div>`;
-}).join("");
-
-const lines = V.merged_lines.additions + V.merged_lines.deletions;
-const prevDate = V.prev_as_of && day(V.prev_as_of).toLocaleDateString("en-SG", {day: "numeric", month: "short", timeZone: "UTC"});
-const delta = (k, d = 0) => {
-  if (!V.prev) return "";
-  const x = V.now[k] - V.prev[k];
-  return `${x > 0 ? "+" : x < 0 ? "−" : "±"}${fmt(+Math.abs(x).toFixed(d))} since ${prevDate}`;
-};
-const tiles = [
-  {v: V.counts.merged, l: "PRs merged", s: `${fmt(lines)} lines changed. ${V.small_merged} are under 20 lines. ${V.counts.open} more open.`, d: delta("merged"), src: "GitHub · opengovsg/maps"},
-  {v: V.linear.completed, l: "Linear issues done", s: `of ${V.linear.assigned} assigned. ${V.linear.per_week.toFixed(2)} a week; team median ${V.linear.baseline.completed_per_week.median.toFixed(2)}.`, d: delta("linear_done"), src: "Linear · MAPS team"},
-  {v: 4, l: "Features shipped to officers and the public", s: "Stacked markers, ownership transfer, editable map link, Google Maps hand-off.", src: "GitHub merges, Linear"},
-  {v: "4+", l: "User tests run", s: "Moderated sessions with officers from SPF, NParks and NEA.", src: "Notion · Data ingestion UT"},
-  {v: 79, l: "Issues caught before release", s: "Severity-tagged, across five UAT and bug-bash docs he ran.", src: "Notion"},
-];
-$("#tiles").innerHTML = tiles.map(t => `<div class="tile"><span class="v num">${t.v}</span><span class="l">${t.l}</span><span class="s">${t.s}</span>${t.d ? `<span class="d">${t.d}</span>` : ""}<span class="src">${t.src}</span></div>`).join("");
-
-const gb = V.gh_baseline, lb = V.linear.baseline;
-const benchRows = [
-  {label: "Merged PRs per week", note: `GitHub · n = ${gb.merged_per_week.n} authors`, b: gb.merged_per_week, me: gb.merged_per_week.me, unit: "", d: 2, k: "merged_per_week",
-   verdict: "Between the team median and the 75th percentile. The 75th percentile rose this week, partly from a contributor with 2 days of tenure."},
-  {label: "Linear issues done per week", note: `Linear · n = ${lb.n_assignees} assignees`, b: lb.completed_per_week, me: V.linear.per_week, unit: "", d: 2, k: "linear_per_week",
-   verdict: "Equals the team's 75th percentile (n = 5), so read it as direction, not rank."},
-  {label: "Teammates' PRs reviewed per week", note: `GitHub · n = ${gb.reviews_per_week.n} authors`, b: gb.reviews_per_week, me: gb.reviews_per_week.me, unit: "", d: 2,
-   verdict: `Above the team median of 0, but only ${V.reviews_given} PRs in total.`},
-  {label: "Median hours from open to merge", note: `GitHub · n = ${gb.median_ttm_hours.n} authors with merges · lower is faster`, b: gb.median_ttm_hours, me: gb.median_ttm_hours.me, unit: " h", d: 1,
-   verdict: "Slower than the team median, at the 75th percentile."},
-  {label: "Lines changed in merged PRs", note: `GitHub · n = ${gb.lines_merged.n} authors`, b: gb.lines_merged, me: gb.lines_merged.me, unit: "", d: 0,
-   verdict: "Above the team median."},
-];
-const bench = $("#bench");
-for (const r of benchRows) {
-  const row = document.createElement("div");
-  row.className = "brow";
-  row.innerHTML = `<div class="bl"><b>${r.label}</b><small>${r.note}</small><span class="verdict">${r.verdict}${r.k && V.prev ? ` Was ${fmt(+V.prev[r.k].toFixed(r.d))} on ${prevDate}.` : ""}</span></div>`;
-  const W = 640, H = 56, L = 10, R = 60;
-  const max = Math.max(r.b.p75, r.me) * 1.12;
-  const x = v => L + (W - L - R) * v / max;
-  const svg = el("svg", {viewBox: `0 0 ${W} ${H}`, width: "100%", role: "img", "aria-label": `${r.label}: Anselm ${r.me}, team median ${r.b.median}`});
-  el("line", {class: "axis", x1: x(0), x2: W - R + 10, y1: 30, y2: 30}, svg);
-  el("text", {x: x(0), y: 54}, svg).textContent = "0";
-  el("text", {x: W - R + 10, y: 54, "text-anchor": "end"}, svg).textContent = fmt(+max.toFixed(r.d));
-  const band = el("rect", {x: x(r.b.p25), y: 20, width: Math.max(2, x(r.b.p75) - x(r.b.p25)), height: 20, rx: 3, fill: "var(--band)",
-    "data-tip": `Team middle 50%: ${fmt(+r.b.p25.toFixed(r.d))} to ${fmt(+r.b.p75.toFixed(r.d))}${r.unit}`}, svg);
-  el("line", {x1: x(r.b.median), x2: x(r.b.median), y1: 16, y2: 44, stroke: "var(--ink2)", "stroke-width": 2,
-    "data-tip": `Team median: ${fmt(+r.b.median.toFixed(r.d))}${r.unit}`}, svg);
-  const mx = x(r.me);
-  const pin = el("g", {transform: `translate(${mx},30)`, "data-tip": `Anselm: ${fmt(+r.me.toFixed(r.d))}${r.unit}`}, svg);
-  el("path", {d: "M0 0 C-7 -9 -8 -12 -8 -16 A8 8 0 1 1 8 -16 C8 -12 7 -9 0 0Z", fill: "var(--accent)", stroke: "var(--surface)", "stroke-width": 2}, pin);
-  el("circle", {cx: 0, cy: -16, r: 3, fill: "var(--surface)"}, pin);
-  const t = el("text", {class: "val", x: mx + 12, y: 16}, svg);
-  t.textContent = fmt(+r.me.toFixed(r.d)) + r.unit;
-  row.appendChild(svg);
-  bench.appendChild(row);
+$("asof").textContent = `Impact · as of ${day(V.as_of).toLocaleDateString("en-SG",{day:"numeric",month:"short",year:"numeric",timeZone:"Asia/Singapore"})}`;
+$("role").textContent = C.role;
+{
+  const s = day(V.start), e = day(C.end_date), n = day(V.as_of), f = (n - s) / (e - s);
+  const svg = $("tenure"), x = 8 + f * 324;
+  el("line", {x1: 8, x2: 332, y1: 20, y2: 20, stroke: "var(--rule)", "stroke-width": 6, "stroke-linecap": "round"}, svg);
+  el("line", {x1: 8, x2: x, y1: 20, y2: 20, stroke: "var(--accent)", "stroke-width": 6, "stroke-linecap": "round"}, svg);
+  el("circle", {cx: x, cy: 20, r: 7, fill: "var(--card)", stroke: "var(--accent)", "stroke-width": 3}, svg);
+  const wk = Math.floor((n - s) / 6048e5) + 1, tot = Math.round((e - s) / 6048e5);
+  $("tenurecap").innerHTML = `<span>${short(V.start)}</span><span style="color:var(--ink)">week ${wk} of ${tot}</span><span>${short(C.end_date)}</span>`;
 }
 
-const LANES = ["Stacked markers & map UX", "Map ownership transfer", "Editable map link", "Google Maps links", "Search", "Tech debt & polish", "Support & reliability", "CSV ingestion", "Onboarding", "Dev tooling & agent skills", "Other"];
-(function timeline() {
-  const svg = $("#timeline");
-  const W = 980, top = 40, left = 190, right = 16, barH = 70;
-  const lanes = LANES.filter(l => V.prs.some(p => p.theme === l));
-  const t0 = day(V.start), t1 = day(V.as_of);
-  const x = d => left + (W - left - right) * (day(d) - t0) / (t1 - t0);
-  const r = p => Math.min(13, 3.5 + Math.sqrt(p.additions + p.deletions) / 9);
-  const at = p => p.state === "merged" ? p.merged : p.created;
-  const placed = new Map(lanes.map(l => [l, []]));
-  for (const p of [...V.prs].sort((a, b) => r(b) - r(a))) {
-    const mine = placed.get(p.theme), px = x(at(p));
-    for (let k = 0; ; k++) {
-      const dy = (k % 2 ? -1 : 1) * Math.ceil(k / 2) * 9;
-      if (mine.every(q => Math.hypot(q.px - px, q.dy - dy) >= q.r + r(p) + 1.5)) { mine.push({p, px, dy, r: r(p)}); break; }
+/* stats: total, change since last snapshot, and per-week position against the team (band = p25–p75, tick = median) */
+{
+  const b = V.gh_baseline, L = V.linear, now = V.now, prev = V.prev;
+  const delta = k => { if (!prev) return `<div class="d"></div>`; const x = now[k] - prev[k]; if (!x) return `<div class="d">no change</div>`;
+    return `<div class="d ${x > 0 ? "up" : "down"}">${x > 0 ? "▲" : "▼"} ${fmt(Math.abs(x))} since ${short(V.prev_as_of)}</div>`; };
+  const items = [
+    {k: "PRs merged", v: now.merged, d: delta("merged"), q: b.merged_per_week, unit: "/wk", ref: "E1"},
+    {k: "Linear issues done", v: now.linear_done, d: delta("linear_done"), q: {...L.baseline.completed_per_week, me: L.per_week, n: L.baseline.n_assignees}, unit: "/wk", ref: "E17"},
+    {k: "Lines merged", v: now.lines, d: delta("lines"), q: b.lines_merged, unit: "", ref: "E1"},
+    {k: "Teammate PRs reviewed", v: now.reviews, d: delta("reviews"), q: b.reviews_per_week, unit: "/wk", ref: "E1"},
+    {k: "Issues caught before release", v: C.caught_before_release.value, d: `<div class="d">in 5 UAT and bug-bash docs</div>`, ref: C.caught_before_release.ref},
+  ];
+  for (const it of items) {
+    const div = document.createElement("div"); div.className = "stat";
+    div.innerHTML = `<div class="k">${it.k}${refs([it.ref])}</div><div class="v">${fmt(it.v)}</div>${it.d}`;
+    if (it.q) {
+      const q = it.q, max = Math.max(q.me, q.p75) * 1.12 || 1, X = v => 4 + (v / max) * 92;
+      const svg = el("svg", {viewBox: "0 0 100 24", preserveAspectRatio: "none"}, div);
+      el("line", {x1: 4, x2: 96, y1: 12, y2: 12, stroke: "var(--rule)", "stroke-width": 1.2, "vector-effect": "non-scaling-stroke"}, svg);
+      el("rect", {x: X(q.p25), width: Math.max(X(q.p75) - X(q.p25), .8), y: 7, height: 10, fill: "var(--rule)"}, svg);
+      el("line", {x1: X(q.median), x2: X(q.median), y1: 3, y2: 21, stroke: "var(--muted)", "stroke-width": 1.5, "vector-effect": "non-scaling-stroke"}, svg);
+      el("rect", {x: X(q.me) - 1.6, y: 6, width: 3.2, height: 12, rx: 1.6, fill: "var(--accent)"}, svg);
+      const d = it.unit ? 2 : 0;
+      div.insertAdjacentHTML("beforeend", `<div class="cmp"><span style="color:var(--accent)">you ${fmt(q.me, d)}${it.unit}</span> · team median ${fmt(q.median, d)} · n=${q.n}</div>`);
     }
+    $("stats").appendChild(div);
   }
-  const laneSpan = new Map(lanes.map(l => {
-    const m = placed.get(l);
-    return [l, {up: Math.max(15, ...m.map(q => q.r - q.dy + 3)), down: Math.max(15, ...m.map(q => q.r + q.dy + 3))}];
-  }));
-  const laneY = new Map();
-  let acc = top;
-  for (const l of lanes) { const s = laneSpan.get(l); laneY.set(l, acc + s.up); acc += s.up + s.down; }
-  const plotH = acc - top;
-  const H = top + plotH + 26 + barH + 22;
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
-  svg.style.minWidth = "760px";
-  svg.style.width = "100%";
-  for (let i = 0; i <= NWEEKS; i++) {
-    const d = new Date(+t0 + i * 7 * DAY).toISOString().slice(0, 10);
-    if (day(d) > t1) break;
-    el("line", {class: "grid", x1: x(d), x2: x(d), y1: top - 6, y2: top + plotH + 26 + barH}, svg);
-    if (i < NWEEKS) {
-      el("text", {x: x(d) + 4, y: top - 24}, svg).textContent = `W${34 + i}`;
-      el("text", {x: x(d) + 4, y: top - 11}, svg).textContent = day(d).toLocaleDateString("en-SG", {day: "numeric", month: "short", timeZone: "UTC"});
-    }
-  }
-  lanes.forEach(l => {
-    const y = laneY.get(l);
-    el("line", {class: "grid", x1: left, x2: W - right, y1: y, y2: y, "stroke-dasharray": "2 4"}, svg);
-    el("text", {class: "lab", x: left - 12, y: y + 4, "text-anchor": "end"}, svg).textContent = l;
-  });
-  for (const {p, dy} of [...placed.values()].flat()) {
-    const y = laneY.get(p.theme) + dy;
-    const d = at(p);
-    const tip = `#${p.number} ${p.title}\n${p.state === "merged" ? "Merged " + p.merged : p.state === "open" ? "Open since " + p.created : "Closed, opened " + p.created} · +${fmt(p.additions)} / -${fmt(p.deletions)}`;
-    const a = el("a", {href: p.url, "aria-label": tip}, svg);
-    el("circle", {cx: x(d), cy: y, r: r(p) + 6, fill: "transparent", "data-tip": tip}, a);
-    el("circle", p.state === "merged"
-      ? {cx: x(d), cy: y, r: r(p), fill: "var(--accent)", stroke: "var(--surface)", "stroke-width": 2, "pointer-events": "none"}
-      : {cx: x(d), cy: y, r: r(p), fill: "var(--surface)", stroke: p.state === "open" ? "var(--accent)" : "var(--closed)", "stroke-width": 2, "stroke-dasharray": p.state === "closed" ? "3 2" : "none", "pointer-events": "none"}, a);
-  }
-  const by = top + plotH + 26, bmax = Math.max(...Object.values(V.merged_by_week));
-  el("text", {class: "lab", x: left - 12, y: by + barH / 2, "text-anchor": "end"}, svg).textContent = "Merged per week";
-  el("line", {class: "axis", x1: left, x2: W - right, y1: by + barH, y2: by + barH}, svg);
-  weekKeys.forEach((k, i) => {
-    const n = V.merged_by_week[k] || 0;
-    const ws = new Date(+t0 + i * 7 * DAY).toISOString().slice(0, 10);
-    const we = new Date(Math.min(+t0 + (i + 1) * 7 * DAY, +t1)).toISOString().slice(0, 10);
-    const bw = x(we) - x(ws) - 8, h = (barH - 14) * n / bmax;
-    if (n) {
-      el("path", {d: `M${x(ws) + 4} ${by + barH} v${-h + 4} q0 -4 4 -4 h${bw - 8} q4 0 4 4 v${h - 4}z`, fill: "var(--accent)", "data-tip": `${k}: ${n} merged`}, svg);
-      el("text", {class: "val", x: x(ws) + 4 + bw / 2, y: by + barH - h - 4, "text-anchor": "middle"}, svg).textContent = n;
-    }
-  });
-})();
-
-const tbody = $("#themes tbody");
-tbody.innerHTML = LANES.filter(l => V.themes[l]).map(l => {
-  const t = V.themes[l];
-  return `<tr><td>${l}</td><td class="n">${t.merged}</td><td class="n">${t.open}</td><td class="n">${t.closed}</td><td class="n">${fmt(t.lines_merged)}</td></tr>`;
-}).join("");
-
-const usage = $("#usage");
-const notes = {
-  stacked_marker_group_opened: "1,247 group-panel opens by 486 people across 20 maps in the first eleven days of tracking. Daily opens settled at about 80 to 110 after a launch-day 204. The event is new, so there is no before-number.",
-  map_ownership_transferred: "Two transfers in production ever, both on 29 Oct: one by an officer, one by the team. Nothing in the three weeks after the 8 Oct launch, and nothing since. Either there was no use, or the event was not firing until then.",
-  search_performed: "Context, not his adoption: search existed before he started, and #911 only changed what is logged. There is no step change at #911. The sidebar-pick event it added does not appear in production.",
-};
-for (const f of V.posthog) {
-  const c = document.createElement("article");
-  c.className = "card";
-  c.innerHTML = `<div class="row"><h3>${f.feature.replace(/ \(MAPS-\d+\).*$/, "").replace(/ --.*$/, "")}</h3><span class="mono" style="color:var(--muted);font-size:12px">${f.event}</span></div>`;
-  const W = 420, H = 150, L = 8, B = 24, T = 18;
-  const daily = f.daily && f.weekly.filter(w => w.count).length < 2;
-  const series = daily ? f.daily.map(x => ({week_starting: x.day, count: x.count, unique_users: x.unique_users, partial_week: x.partial_day, label: true})) : f.weekly;
-  const max = Math.max(1, ...series.map(w => w.count));
-  const bw = (W - L * 2) / series.length;
-  const svg = el("svg", {viewBox: `0 0 ${W} ${H}`, width: "100%", role: "img", "aria-label": `${f.event} weekly counts`});
-  el("line", {class: "axis", x1: L, x2: W - L, y1: H - B, y2: H - B}, svg);
-  series.forEach((w, i) => {
-    const h = (H - B - T) * w.count / max, x0 = L + i * bw + 4;
-    const launch = !daily && w.week_starting <= f.launch_date && f.launch_date < new Date(day(w.week_starting).getTime() + 7 * DAY).toISOString().slice(0, 10);
-    if (launch) el("line", {x1: x0 - 2, x2: x0 - 2, y1: T - 8, y2: H - B, stroke: "var(--ink2)", "stroke-dasharray": "3 3"}, svg);
-    if (w.count) el("path", {d: `M${x0} ${H - B} v${-Math.max(h - 3, 0)} q0 -3 3 -3 h${bw - 14} q3 0 3 3 v${Math.max(h - 3, 0)}z`, fill: "var(--accent)", opacity: w.partial_week ? .45 : 1,
-      "data-tip": `${daily ? "" : "Week of "}${w.week_starting}: ${fmt(w.count)} events, ${fmt(w.unique_users)} people${w.partial_week ? " (partial)" : ""}`}, svg);
-    el("text", {class: "val", x: x0 + (bw - 8) / 2, y: H - B - h - 5, "text-anchor": "middle"}, svg).textContent = w.count >= 10000 ? `${(w.count / 1000).toFixed(1)}k` : fmt(w.count);
-    el("text", {x: x0 + (bw - 8) / 2, y: H - 8, "text-anchor": "middle"}, svg).textContent = day(w.week_starting).toLocaleDateString("en-SG", {day: "numeric", month: "short", timeZone: "UTC"});
-  });
-  c.appendChild(svg);
-  const p = document.createElement("p");
-  p.textContent = notes[f.event];
-  c.appendChild(p);
-  usage.appendChild(c);
 }
 
-const tip = $("#tip");
-document.addEventListener("pointerover", e => {
-  const t = e.target.closest("[data-tip]");
-  if (!t) { tip.hidden = true; return; }
-  tip.textContent = t.getAttribute("data-tip");
-  tip.style.whiteSpace = "pre-line";
-  tip.hidden = false;
-});
-document.addEventListener("pointermove", e => {
-  if (tip.hidden) return;
-  const w = tip.offsetWidth;
-  tip.style.left = Math.min(e.clientX + 14, innerWidth - w - 8) + "px";
-  tip.style.top = (e.clientY + 16) + "px";
-});
+/* timeline: one lane per project, one dot per PR */
+{
+  const prs = V.prs, s = day(V.start), e = day(V.as_of);
+  const first = {}; prs.forEach(p => { if (!(p.theme in first) || p.created < first[p.theme]) first[p.theme] = p.created; });
+  const lanes = Object.keys(first).filter(t => t !== "Other").sort((a, b) => first[a] < first[b] ? -1 : 1);
+  const W = 1000, L = 200, R = 16, H = 32, top = 8, svg = $("timeline");
+  const h = top + lanes.length * H + 34; svg.setAttribute("viewBox", `0 0 ${W} ${h}`);
+  const X = d => L + (day(d) - s) / (e - s) * (W - L - R);
+  for (let m = new Date(s.getFullYear(), s.getMonth() + 1, 1); m <= e; m.setMonth(m.getMonth() + 1)) {
+    const iso = m.toLocaleDateString("en-CA"), x = X(iso);
+    el("line", {x1: x, x2: x, y1: top, y2: h - 26, stroke: "var(--rule)"}, svg);
+    el("text", {x, y: h - 8, "text-anchor": "middle", "font-family": "IBM Plex Mono", "font-size": 13, fill: "var(--muted)"}, svg).textContent = m.toLocaleDateString("en-SG", {month: "short"});
+  }
+  lanes.forEach((t, i) => {
+    const y = top + i * H + H / 2;
+    el("text", {x: 0, y: y + 5, "font-family": "IBM Plex Sans", "font-size": 14, fill: "var(--ink)"}, svg).textContent = t;
+    el("line", {x1: L, x2: W - R, y1: y, y2: y, stroke: "var(--rule)", "stroke-dasharray": "2 4"}, svg);
+    prs.filter(p => p.theme === t).sort((a, b) => (b.additions + b.deletions) - (a.additions + a.deletions)).forEach(p => {
+      const lines = (p.additions || 0) + (p.deletions || 0), r = Math.max(4, Math.min(13, Math.sqrt(lines) / 5.5));
+      const st = p.merged ? "merged" : p.state === "open" ? "open" : "closed";
+      const a = el("a", {href: p.url, target: "_blank"}, svg);
+      const c = el("circle", {cx: X(p.merged || p.created), cy: y, r,
+        fill: st === "merged" ? "var(--accent)" : "var(--card)", "fill-opacity": st === "merged" ? .8 : .9,
+        stroke: st === "closed" ? "var(--faint)" : "var(--accent)", "stroke-width": st === "merged" ? 1 : 2}, a);
+      if (st === "merged") c.setAttribute("stroke", "var(--card)");
+      el("title", {}, c).textContent = `#${p.number} · ${st} · ${fmt(lines)} lines\n${p.title}`;
+    });
+  });
+  const c = V.counts; $("prsum").textContent = `${c.merged} merged · ${c.open} open · ${c.closed} closed`;
+}
+
+/* projects */
+$("projects").innerHTML = C.projects.map(p => `
+  <div class="row">
+    <div><span class="pill ${p.status}">${{shipped:"Shipped",resolved:"Resolved",review:"In review",open:"Not merged",spotted:"Spotted"}[p.status]}</span><div class="when">${esc(p.date)}</div></div>
+    <div><div class="name">${esc(p.name)}<span class="key">${esc(p.key)}</span></div><div class="what">${esc(p.what)}</div>${p.caveat ? `<div class="cav">${esc(p.caveat)}</div>` : ""}</div>
+    <div class="proof"><div class="p">${esc(p.proof)}</div><div class="s">${esc(p.proof_sub)}${refs(p.refs)}</div></div>
+    <div class="prs">${p.prs.map(r => `<a href="${r.url}" target="_blank">#${r.n}</a>`).join("")}</div>
+  </div>`).join("");
+
+/* usage: weekly bars, launch marked */
+{
+  const show = {stacked_marker_group_opened: ["Stacked-marker group opens", "tracking from"], map_ownership_transferred: ["Ownership transfers", "launched"]};
+  V.posthog.filter(f => show[f.event]).forEach(f => {
+    const wk = f.weekly, total = wk.reduce((a, w) => a + w.count, 0);
+    const div = document.createElement("div"); div.className = "chart";
+    div.innerHTML = `<div class="t">${show[f.event][0]}${refs(["E16"])}</div><div class="u">${fmt(total)} outside the team · ${show[f.event][1]} ${short(f.launch_date)} · per week</div>`;
+    const W = 460, H = 110, B = 18, max = Math.max(1, ...wk.map(w => w.count)), bw = W / wk.length;
+    const svg = el("svg", {viewBox: `0 0 ${W} ${H + B}`}, div);
+    wk.forEach((w, i) => {
+      const bh = w.count / max * (H - 16), x = i * bw;
+      if (w.count) el("rect", {x: x + 3, y: H - bh, width: bw - 6, height: Math.max(bh, 2), fill: "var(--accent)", rx: 1.5}, svg);
+      if (w.count) el("text", {x: x + bw / 2, y: H - bh - 5, "text-anchor": "middle", "font-family": "IBM Plex Mono", "font-size": 12, fill: "var(--ink)"}, svg).textContent = fmt(w.count);
+      if (w.week_starting <= f.launch_date && (!wk[i + 1] || wk[i + 1].week_starting > f.launch_date)) {
+        el("line", {x1: x + 1, x2: x + 1, y1: 4, y2: H, stroke: "var(--warn)", "stroke-dasharray": "3 3"}, svg);
+        el("text", {x: x - 5, y: H - 6, "text-anchor": "end", "font-family": "IBM Plex Mono", "font-size": 11, fill: "var(--warn)"}, svg).textContent = show[f.event][1].split(" ")[0];
+      }
+    });
+    el("line", {x1: 0, x2: W, y1: H, y2: H, stroke: "var(--rule)"}, svg);
+    el("text", {x: 0, y: H + 15, "font-family": "IBM Plex Mono", "font-size": 11, fill: "var(--muted)"}, svg).textContent = short(wk[0].week_starting);
+    el("text", {x: W, y: H + 15, "text-anchor": "end", "font-family": "IBM Plex Mono", "font-size": 11, fill: "var(--muted)"}, svg).textContent = short(wk[wk.length - 1].week_starting);
+    $("usage").appendChild(div);
+  });
+}
+
+/* kudos, weak spots, next */
+$("kudos").innerHTML = C.kudos.map(k => `<div class="kudo"><div class="m"><b>${esc(k.who)}</b>${esc(k.where)} · ${esc(k.date)}</div><div>${esc(k.said)}${refs([k.ref])}</div></div>`).join("");
+$("weak").innerHTML = C.weak_spots.map(w => `<li>${esc(w.text)}${refs([w.ref])}</li>`).join("");
+$("next").innerHTML = C.next.map(n => `<li class="${n.done ? "done" : ""}">${esc(n.text)}</li>`).join("");
+
+/* sources: ledger html is hand-curated in content.json */
+$("cov").innerHTML = C.coverage.map(c => `<div><b>${esc(c.source)}<span class="lvl ${c.level}">${esc(c.status)}</span></b>${c.note}</div>`).join("");
+$("ledger").innerHTML = C.ledger.map(r => `<tr id="${r.ref.toLowerCase()}"><td>${r.ref}</td><td>${r.source}</td><td>${r.shows}</td></tr>`).join("");
+const openSrc = () => { if (/^#e\d+$/.test(location.hash)) { $("sources").open = true; document.querySelector(location.hash)?.scrollIntoView({block: "center"}); } };
+addEventListener("hashchange", openSrc); openSrc();
+$("foot").textContent = "Comparisons are Maps-team aggregates per week of tenure, never named colleagues. Self-reported figures are labelled. Updated every Friday.";
 </script>
+</body>
+</html>
